@@ -41,7 +41,6 @@ const LandingPage = () => {
     }
 
     const googleSuccess = async (response: any) => {
-        const clientId = response.clientId
         const credential = response.credential
         const verifyPayload: VerifyTokenDTO = {
             token: credential,
@@ -194,7 +193,11 @@ const LandingPage = () => {
                 className="bg-blue-700 p-2 text-white rounded w-60 flex flex-row items-center justify-center"
             >
                 {authenticatingMS && (
-                    <Spinner color="white" size="sm" className="mr-2" />
+                    <Spinner
+                        className="h-4 w-4 mr-2"
+                        onPointerEnterCapture={undefined}
+                        onPointerLeaveCapture={undefined}
+                    />
                 )}
                 <img
                     src={MicrosoftIcon}

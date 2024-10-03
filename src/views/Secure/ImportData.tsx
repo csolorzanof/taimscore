@@ -135,7 +135,7 @@ const ImportData = () => {
                             />
                             {errors.standardVersion && (
                                 <span className="text-red-500">
-                                    {errors.standardVersion.message}
+                                    {errors.standardVersion.message?.toString()}
                                 </span>
                             )}
                             <label className="block mb-2">

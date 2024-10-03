@@ -1,6 +1,6 @@
 import { PropsWithChildren, useContext } from 'react'
 import { AuthContext } from '../AuthProvider'
-import { Navigate, Route } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 import { jwtDecode } from 'jwt-decode'
 import { AlertsContext } from '../components/alerts/Alerts-Context'
 

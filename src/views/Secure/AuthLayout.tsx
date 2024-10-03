@@ -45,7 +45,12 @@ const AuthLayout = () => {
 
     return (
         <div>
-            <Navbar className="p-4 flex flex-row bg-blue-400 px-4 py-2 lg:px-8 lg:py-4">
+            <Navbar
+                className="p-4 flex flex-row bg-blue-400 px-4 py-2 lg:px-8 lg:py-4"
+                onPointerEnterCapture={undefined}
+                onPointerLeaveCapture={undefined}
+                placeholder={undefined}
+            >
                 <div className="flex items-center">
                     <img
                         src={HamburgerIcon}
@@ -55,7 +60,12 @@ const AuthLayout = () => {
                     />
                 </div>
                 <div className="container mx-auto flex items-center justify-between text-blue-gray-900">
-                    <Typography className="mr-4 cursor-pointer py-1.5 font-bold text-lg">
+                    <Typography
+                        className="mr-4 cursor-pointer py-1.5 font-bold text-lg"
+                        placeholder={undefined}
+                        onPointerEnterCapture={undefined}
+                        onPointerLeaveCapture={undefined}
+                    >
                         <Link to="/secure/landing">TAIMSCORE</Link>
                     </Typography>
                 </div>
@@ -67,14 +77,33 @@ const AuthLayout = () => {
                                 alt="Profile"
                                 className="w-8 h-8 rounded-full"
                             />
-                            <Typography className="text-sm font-light">{`${user?.name}`}</Typography>
+                            <Typography
+                                placeholder={undefined}
+                                onPointerEnterCapture={undefined}
+                                onPointerLeaveCapture={undefined}
+                                className="text-sm font-light"
+                            >{`${user?.name}`}</Typography>
                         </div>
                     </MenuHandler>
-                    <MenuList className="w-28 bg-blue-700 text-white rounded-md">
+                    <MenuList
+                        className="w-28 bg-blue-700 text-white rounded-md"
+                        placeholder={undefined}
+                        onPointerEnterCapture={undefined}
+                        onPointerLeaveCapture={undefined}
+                    >
                         {user?.authProviderId === 1 && (
-                            <MenuItem>Change password</MenuItem>
+                            <MenuItem
+                                placeholder={undefined}
+                                onPointerEnterCapture={undefined}
+                                onPointerLeaveCapture={undefined}
+                            >
+                                Change password
+                            </MenuItem>
                         )}
                         <MenuItem
+                            placeholder={undefined}
+                            onPointerEnterCapture={undefined}
+                            onPointerLeaveCapture={undefined}
                             className="flex flex-row p-2"
                             onClick={() => logout()}
                         >
@@ -90,6 +119,9 @@ const AuthLayout = () => {
             </Navbar>
 
             <Drawer
+                placeholder={undefined}
+                onPointerEnterCapture={undefined}
+                onPointerLeaveCapture={undefined}
                 open={showDrawer}
                 onClose={closeDrawer}
                 className="flex flex-col gap-2 p-4 w-52 overflow-y-auto bg-blue-200"
@@ -104,7 +136,13 @@ const AuthLayout = () => {
                         alt="Dashboard"
                         className="w-6 h-6"
                     />
-                    <Typography>Dashboard</Typography>
+                    <Typography
+                        placeholder={undefined}
+                        onPointerEnterCapture={undefined}
+                        onPointerLeaveCapture={undefined}
+                    >
+                        Dashboard
+                    </Typography>
                 </Link>
                 <Link
                     to="/secure/training"
@@ -116,7 +154,13 @@ const AuthLayout = () => {
                         alt="Training"
                         className="w-6 h-6"
                     />
-                    <Typography>Training</Typography>
+                    <Typography
+                        placeholder={undefined}
+                        onPointerEnterCapture={undefined}
+                        onPointerLeaveCapture={undefined}
+                    >
+                        Training
+                    </Typography>
                 </Link>
                 <Link
                     to="/secure/assessment-profile"
@@ -128,7 +172,13 @@ const AuthLayout = () => {
                         alt="Assessment Profile"
                         className="w-6 h-6"
                     />
-                    <Typography>Assessment Profile</Typography>
+                    <Typography
+                        placeholder={undefined}
+                        onPointerEnterCapture={undefined}
+                        onPointerLeaveCapture={undefined}
+                    >
+                        Assessment Profile
+                    </Typography>
                 </Link>
                 <Link
                     to="/secure/assessment"
@@ -140,7 +190,13 @@ const AuthLayout = () => {
                         alt="Assessment"
                         className="w-6 h-6"
                     />
-                    <Typography>Assessment</Typography>
+                    <Typography
+                        placeholder={undefined}
+                        onPointerEnterCapture={undefined}
+                        onPointerLeaveCapture={undefined}
+                    >
+                        Assessment
+                    </Typography>
                 </Link>
                 <Link
                     to="/secure/reports"
@@ -148,7 +204,13 @@ const AuthLayout = () => {
                     onClick={closeDrawer}
                 >
                     <img src={ReportsIcon} alt="Reports" className="w-6 h-6" />
-                    <Typography>Reports</Typography>
+                    <Typography
+                        placeholder={undefined}
+                        onPointerEnterCapture={undefined}
+                        onPointerLeaveCapture={undefined}
+                    >
+                        Reports
+                    </Typography>
                 </Link>
                 <Link
                     to="/secure/recommendation"
@@ -160,7 +222,13 @@ const AuthLayout = () => {
                         alt="Recommendation"
                         className="w-6 h-6"
                     />
-                    <Typography>Recommendation</Typography>
+                    <Typography
+                        placeholder={undefined}
+                        onPointerEnterCapture={undefined}
+                        onPointerLeaveCapture={undefined}
+                    >
+                        Recommendation
+                    </Typography>
                 </Link>
                 <Link
                     to="/secure/knowledge-base"
@@ -172,7 +240,13 @@ const AuthLayout = () => {
                         alt="Knowledge Base"
                         className="w-6 h-6"
                     />
-                    <Typography>Knowledge Base</Typography>
+                    <Typography
+                        placeholder={undefined}
+                        onPointerEnterCapture={undefined}
+                        onPointerLeaveCapture={undefined}
+                    >
+                        Knowledge Base
+                    </Typography>
                 </Link>
                 <Link
                     to="/secure/library"
@@ -180,11 +254,25 @@ const AuthLayout = () => {
                     onClick={closeDrawer}
                 >
                     <img src={LibraryIcon} alt="Library" className="w-6 h-6" />
-                    <Typography>Library</Typography>
+                    <Typography
+                        placeholder={undefined}
+                        onPointerEnterCapture={undefined}
+                        onPointerLeaveCapture={undefined}
+                    >
+                        Library
+                    </Typography>
                 </Link>
                 <div>
-                    <Accordion open={showAdmin}>
+                    <Accordion
+                        open={showAdmin}
+                        placeholder={undefined}
+                        onPointerEnterCapture={undefined}
+                        onPointerLeaveCapture={undefined}
+                    >
                         <AccordionHeader
+                            placeholder={undefined}
+                            onPointerEnterCapture={undefined}
+                            onPointerLeaveCapture={undefined}
                             onClick={handleShowAdmin}
                             className="shadow-md flex flex-row gap-2 p-4 hover:bg-blue-800"
                         >
@@ -193,7 +281,13 @@ const AuthLayout = () => {
                                 alt="Admin"
                                 className="w-6 h-6"
                             />
-                            <Typography>Admin</Typography>
+                            <Typography
+                                placeholder={undefined}
+                                onPointerEnterCapture={undefined}
+                                onPointerLeaveCapture={undefined}
+                            >
+                                Admin
+                            </Typography>
                             {!showAdmin && (
                                 <img
                                     src={RightChevron}
