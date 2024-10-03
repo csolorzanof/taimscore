@@ -15,6 +15,14 @@ import Recommendation from '../views/Secure/Recommendation'
 import Knowledgebase from '../views/Secure/Knowledgebase'
 import Reports from '../views/Secure/Reports'
 import Library from '../views/Secure/Library'
+import AdminConfiguration from '../views/Secure/AdminConfiguration'
+import AdminTenantInformation from '../views/Secure/AdminTenantInformation'
+import AdminUserGroups from '../views/Secure/AdminUserGroups'
+import AdminUsers from '../views/Secure/AdminUsers'
+import AdminSubscription from '../views/Secure/AdminSubscription'
+import AdminLogViewer from '../views/Secure/AdminLogViewer'
+import ImportData from '../views/Secure/ImportData'
+import ImportDataMapping from '../views/Secure/ImportDataMapping'
 
 const Router = createBrowserRouter([
     { path: '/', element: <LandingPage /> },
@@ -38,8 +46,16 @@ const Router = createBrowserRouter([
             { path: 'assessment', element: <Assessment /> },
             { path: 'reports', element: <Reports /> },
             { path: 'recommendation', element: <Recommendation /> },
-            { path: 'knowledgebase', element: <Knowledgebase /> },
+            { path: 'knowledge-base', element: <Knowledgebase /> },
             { path: 'library', element: <Library /> },
+            { path: 'configuration', element: <AdminConfiguration /> },
+            { path: 'tenant-info', element: <AdminTenantInformation /> },
+            { path: 'user-groups', element: <AdminUserGroups /> },
+            { path: 'users', element: <AdminUsers /> },
+            { path: 'subscription', element: <AdminSubscription /> },
+            { path: 'log-viewer', element: <AdminLogViewer /> },
+            { path: 'import-data', element: <ImportData /> },
+            { path: 'import-data/mapping', element: <ImportDataMapping /> },
         ],
     },
 ])

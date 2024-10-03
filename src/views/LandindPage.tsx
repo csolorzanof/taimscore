@@ -1,45 +1,44 @@
-import { useForm, FormProvider } from 'react-hook-form'
 import { GoogleLogin } from '@react-oauth/google'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { AuthContext } from '../AuthProvider'
-import { useContext, useState } from 'react'
-import { LoginDTO } from '../DTOs/LoginDTO'
+import { useContext, useEffect, useState } from 'react'
 import { LoginResponseDTO } from '../DTOs/LoginResponseDTO'
 import { VerifyTokenDTO } from '../DTOs/VerifyTokenDTO'
 import { AlertsContext } from '../components/alerts/Alerts-Context'
+import { useMsal } from '@azure/msal-react'
+import { AccountInfo } from '@azure/msal-browser'
+import { loginRequest } from '../MSALConfig'
+import { VerifyMSALAccountDTO } from '../DTOs/VerifyMSALAccountDTO'
+import MicrosoftIcon from '../assets/microsoft.svg'
+import { Spinner } from '@material-tailwind/react'
+import HispiLogo from '../assets/hispi.png'
+import LicAgreementPDF from '../assets/TAIMSCORE_LicenseAgreement-09-09-2024.pdf'
+import PrivPolicyPDF from '../assets/TAIMSCORE_PrivacyPolicy_09-09-2024.pdf'
 
 const apiBaseURL = import.meta.env.VITE_BackendURL
 
 const LandingPage = () => {
-    const methods = useForm()
-    const register = methods.register
     const { setToken, setUser, setLoginResponse } = useContext(AuthContext)
     const { addAlert } = useContext(AlertsContext)
     const navigate = useNavigate()
-    const [error, setError] = useState<string | null>(null)
+    const { instance } = useMsal()
+    const [account, setAccount] = useState<AccountInfo | null>(null)
+    const [authenticatingMS, setAuthenticatingMS] = useState(false)
+    const [taglineComplete, setTaglineComplete] = useState(false)
 
-    const onSubmit = methods.handleSubmit(async (data) => {
-        const loginDTO: LoginDTO = {
-            userName: data.email,
-            password: data.password,
-        }
-
-        try {
-            const response = await axios.post(`${apiBaseURL}/login`, loginDTO)
-            const token = response.data.token
-            const user = response.data.user
-            setToken(token)
-            setUser(user)
-            navigate('/secure/landing')
-        } catch (error) {
-            if (axios.isAxiosError(error) && error.response?.status === 401) {
-                setError('Invalid credentials')
-            } else {
-                setError('An error occurred. Please try again later')
-            }
-        }
-    })
+    const handleMSLogin = () => {
+        setAuthenticatingMS(true)
+        instance
+            .loginPopup(loginRequest)
+            .then((response) => {
+                console.log(response)
+                setAccount(response.account)
+            })
+            .catch((e) => {
+                console.error(e)
+            })
+    }
 
     const googleSuccess = async (response: any) => {
         const clientId = response.clientId
@@ -86,77 +85,143 @@ const LandingPage = () => {
         })
     }
 
+    useEffect(() => {
+        if (account) {
+            instance
+                .acquireTokenSilent({
+                    scopes: ['openid', 'profile', 'User.Read'],
+                    account: account,
+                })
+                .then((response) => {
+                    const userName = response.account.username
+                    const uniqueId = response.uniqueId
+                    const token = response.accessToken
+
+                    const verifyMSALAccountDTO: VerifyMSALAccountDTO = {
+                        UserName: userName,
+                        UniqueId: uniqueId,
+                        Token: token,
+                    }
+
+                    axios
+                        .post(
+                            `${apiBaseURL}/verifyMSALAccount`,
+                            verifyMSALAccountDTO
+                        )
+                        .then((response) => {
+                            setAuthenticatingMS(false)
+                            const loginResponse: LoginResponseDTO =
+                                response.data
+                            if (loginResponse.redirectToRegister) {
+                                setLoginResponse(loginResponse)
+                                navigate('/register')
+                            } else {
+                                setToken(loginResponse.token)
+                                setUser({
+                                    userId: loginResponse.userId,
+                                    email: loginResponse.email,
+                                    name: loginResponse.name,
+                                    pictureUrl: loginResponse.pictureUrl,
+                                    locale: loginResponse.locale,
+                                    familyName: loginResponse.familyName,
+                                    givenName: loginResponse.givenName,
+                                    authProviderId:
+                                        loginResponse.authProviderId,
+                                })
+                                navigate('/secure/landing')
+                            }
+                        })
+                        .catch((error) => {
+                            setAuthenticatingMS(false)
+                            console.error(error)
+                            addAlert({
+                                id: 'verify-msal-account-failed',
+                                severity: 'error',
+                                message:
+                                    'Microsoft login failed. Try again later',
+                                timeout: 5,
+                                handleDismiss: null,
+                            })
+                        })
+                })
+                .catch((e) => {
+                    setAuthenticatingMS(false)
+                    console.error(e)
+                    addAlert({
+                        id: 'msal-acquire-token-silent-failed',
+                        severity: 'error',
+                        message: 'Microsoft login failed. Try again later',
+                        timeout: 5,
+                        handleDismiss: null,
+                    })
+                })
+        }
+    }, [account, instance])
+
+    useEffect(() => {
+        const interval = setTimeout(() => {
+            setTaglineComplete(true)
+        }, 2500)
+        return () => clearInterval(interval)
+    }, [])
+
     return (
-        <div className="container mx-auto flex flex-col items-center">
-            <h1 className="text-3xl font-bold underline mt-10">TAIMSCORE</h1>
+        <div className="container mx-auto flex flex-col items-center gap-4">
+            <h1 className="text-3xl font-bold mt-10">TAIMSCORE</h1>
+            <img src={HispiLogo} alt="Hispi" className="w-40 h-40" />
+            {!taglineComplete && (
+                <h2>
+                    Building Trust in an{' '}
+                    <span className="text-flicker-out-glow font-bold">Un</span>
+                    certain World!
+                </h2>
+            )}
+            {taglineComplete && (
+                <h2>
+                    Building Trust in an <span className="font-bold">Ai</span>
+                    certain World!
+                </h2>
+            )}
+            <GoogleLogin
+                onSuccess={googleSuccess}
+                onError={googleFailure}
+                cancel_on_tap_outside={true}
+                theme="filled_black"
+            />
 
-            <FormProvider {...methods}>
-                <form
-                    onSubmit={(e) => e.preventDefault()}
-                    noValidate
-                    className="w-72 sm:w-96 mt-10"
+            <button
+                onClick={handleMSLogin}
+                className="bg-blue-700 p-2 text-white rounded w-60 flex flex-row items-center justify-center"
+            >
+                {authenticatingMS && (
+                    <Spinner color="white" size="sm" className="mr-2" />
+                )}
+                <img
+                    src={MicrosoftIcon}
+                    alt="Microsoft"
+                    className="w-6 h-6 inline-block mr-2"
+                />
+                Sign In with Microsoft
+            </button>
+            <div className="flex flex-row">
+                <a
+                    href={LicAgreementPDF}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="underline text-blue-700"
                 >
-                    <div className="flex flex-col space-y-4">
-                        <label htmlFor="email">Email</label>
-                        <input
-                            type="email"
-                            id="email"
-                            className="border border-gray-300 rounded p-2 w-50"
-                            {...register('email', {
-                                required: {
-                                    value: true,
-                                    message: 'Email is required',
-                                },
-                            })}
-                        />
-
-                        <label htmlFor="password">Password</label>
-                        <input
-                            type="password"
-                            id="password"
-                            {...register('password', {
-                                required: {
-                                    value: true,
-                                    message: 'Password is required',
-                                },
-                            })}
-                            className="border border-gray-300 rounded p-2 w-120"
-                        />
-                        <Link
-                            to={'/request-reset-password'}
-                            className="text-blue-500 font-bold"
-                        >
-                            Forgot password?
-                        </Link>
-                        <div className="flex flex-col space-y-4 items-center text-center">
-                            <button
-                                type="submit"
-                                className="bg-blue-500 text-white rounded p-2 w-60"
-                                onClick={onSubmit}
-                            >
-                                Login
-                            </button>
-                            <GoogleLogin
-                                onSuccess={googleSuccess}
-                                onError={googleFailure}
-                            />
-                        </div>
-
-                        <p className="text-center">
-                            Don't have an account?{' '}
-                            <Link
-                                to={'/register'}
-                                className="text-blue-500 font-bold"
-                            >
-                                Sign up for free
-                            </Link>
-                        </p>
-                        {error && (
-                            <p className="text-red-500 text-center">{error}</p>
-                        )}
-                    </div>
-                </form>
-            </FormProvider>
+                    License Agreement
+                </a>
+                <span className="mx-2">|</span>
+                <a
+                    href={PrivPolicyPDF}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="underline text-blue-700"
+                >
+                    Privacy Policy
+                </a>
+            </div>
         </div>
     )
 }

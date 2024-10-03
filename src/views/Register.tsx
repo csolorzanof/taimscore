@@ -130,7 +130,7 @@ const Register = () => {
         }
     }
 
-    const googleRegistration = async (data: any) => {
+    const socialRegistration = async (data: any) => {
         try {
             const registerUserDTO: RegisterUserDTO = {
                 email: data.email,
@@ -152,7 +152,9 @@ const Register = () => {
                 includeInRaffle: data.includeInRaffle,
                 isActive: true,
                 tenantId: 0,
-                authProviderId: 2,
+                authProviderId: loginResponse
+                    ? loginResponse.authProviderId
+                    : 1,
                 locale: loginResponse?.locale,
                 givenName: `${data.firstName} ${data.lastName}`,
                 requiresSecQuestion: false,
@@ -195,7 +197,7 @@ const Register = () => {
 
     const onSubmit = async (data: any) => {
         if (loginResponse) {
-            googleRegistration(data)
+            socialRegistration(data)
         } else {
             regularRegistration(data)
         }

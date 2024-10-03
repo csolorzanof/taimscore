@@ -13,6 +13,8 @@ type AuthContextType = {
     loginResponse: LoginResponseDTO | null
     setLoginResponse: (loginResponse: LoginResponseDTO | null) => void
     logout: () => void
+    importData: any
+    setImportData: any
 }
 
 export const AuthContext = createContext({} as AuthContextType)
@@ -27,6 +29,8 @@ const AuthProvider = (props: PropsWithChildren<AuthProviderProps>) => {
         null
     )
 
+    const [importData, setImportData] = useState<any>(null)
+
     const authValue = {
         token,
         setToken: (token: string | null) => dispatch(setToken(token)),
@@ -38,6 +42,8 @@ const AuthProvider = (props: PropsWithChildren<AuthProviderProps>) => {
             dispatch(setToken(null))
             dispatch(setUser(null))
         },
+        importData,
+        setImportData,
     }
 
     return (

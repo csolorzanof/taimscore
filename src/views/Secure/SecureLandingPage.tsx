@@ -1,5 +1,4 @@
 const SecureLandingPage = () => {
-    console.log('SecureLandingPage')
     return <div>SecureLandingPage</div>
 }
 
