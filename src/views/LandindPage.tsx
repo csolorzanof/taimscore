@@ -21,8 +21,8 @@ const apiBaseURL = import.meta.env.VITE_BackendURL
 console.log('apiBaseURL:', apiBaseURL)
 console.log('GCPID', import.meta.env.VITE_GoogleClientID)
 console.log('GCPSec', import.meta.env.VITE_GoogleClientSecret.slice(0, 10))
-console.log('MSALClientId', import.meta.env.VITE_MSALClientId)
-console.log('MSALTenantId', import.meta.env.VITE_MSALTenantId)
+console.log('MSALClientId', import.meta.env.VITE_MSAL_ClientId)
+console.log('MSALTenantId', import.meta.env.VITE_MSAL_TenantId)
 
 const LandingPage = () => {
     const { setToken, setUser, setLoginResponse } = useContext(AuthContext)

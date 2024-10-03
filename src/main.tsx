@@ -6,7 +6,7 @@ import { MsalProvider } from '@azure/msal-react'
 import { msalConfig } from './MSALConfig.tsx'
 import App from './App.tsx'
 import './index.css'
-
+console.log('MSALConfig:', msalConfig)
 const msalInstance = new PublicClientApplication(msalConfig)
 
 createRoot(document.getElementById('root')!).render(
