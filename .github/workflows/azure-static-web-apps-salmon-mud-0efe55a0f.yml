@@ -33,12 +33,12 @@ jobs:
                   output_location: 'dist' # Built app content directory - optional
                   ###### End of Repository/Build Configurations ######
               env:
-                  VITE_GoogleClientID: ${{ secrets.VITE_GoogleClientID }}
-                  VITE_GoogleClientSecret: ${{ secrets.VITE_GoogleClientSecret }}
-                  VITE_BackendURL: ${{ secrets.VITE_BackendURL }}
-                  VITE_MSAL_ClientID: ${{ secrets.VITE_MSAL_ClientID }}
-                  VITE_MSAL_RedirectURL: ${{ secrets.VITE_MSAL_RedirectURL }}
-                  VITE_MSAL_TenantId: ${{ secrets.VITE_MSAL_TenantId }}
+                  VITE_GoogleClientID: ${{ secrets.VITE_GOOGLECLIENTID }}
+                  VITE_GoogleClientSecret: ${{ secrets.VITE_GOOGLECLIENTSECRET }}
+                  VITE_BackendURL: ${{ secrets.VITE_BACKENDURL }}
+                  VITE_MSAL_ClientID: ${{ secrets.VITE_MSAL_CLIENTID }}
+                  VITE_MSAL_RedirectURL: ${{ secrets.VITE_MSAL_REDIRECTURL }}
+                  VITE_MSAL_TenantId: ${{ secrets.VITE_MSAL_TENANTID }}
 
     close_pull_request_job:
         if: github.event_name == 'pull_request' && github.event.action == 'closed'
