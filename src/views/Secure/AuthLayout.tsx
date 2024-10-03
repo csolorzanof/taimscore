@@ -33,6 +33,7 @@ import SubscriptionIcon from '../../assets/subscription.svg'
 import LogViewerIcon from '../../assets/log-viewer.svg'
 import RightChevron from '../../assets/right-chevron.svg'
 import DownChevron from '../../assets/down-chevron.svg'
+import ImportIcon from '../../assets/import.svg'
 
 const AuthLayout = () => {
     const { user, logout } = useContext(AuthContext)
@@ -91,11 +92,11 @@ const AuthLayout = () => {
             <Drawer
                 open={showDrawer}
                 onClose={closeDrawer}
-                className="flex flex-col gap-2 p-4 w-52 bg-sky-600 overflow-y-auto"
+                className="flex flex-col gap-2 p-4 w-52 overflow-y-auto bg-blue-200"
             >
                 <Link
                     to="/secure/dashboard"
-                    className="shadow-md flex flex-row gap-2 p-4 hover:bg-sky-800"
+                    className="shadow-md flex flex-row gap-2 p-4 hover:bg-blue-800"
                     onClick={closeDrawer}
                 >
                     <img
@@ -107,7 +108,7 @@ const AuthLayout = () => {
                 </Link>
                 <Link
                     to="/secure/training"
-                    className="shadow-md flex flex-row gap-2 p-4 hover:bg-sky-800"
+                    className="shadow-md flex flex-row gap-2 p-4 hover:bg-blue-800"
                     onClick={closeDrawer}
                 >
                     <img
@@ -119,7 +120,7 @@ const AuthLayout = () => {
                 </Link>
                 <Link
                     to="/secure/assessment-profile"
-                    className="shadow-md flex flex-row gap-2 p-4 hover:bg-sky-800"
+                    className="shadow-md flex flex-row gap-2 p-4 hover:bg-blue-800"
                     onClick={closeDrawer}
                 >
                     <img
@@ -131,7 +132,7 @@ const AuthLayout = () => {
                 </Link>
                 <Link
                     to="/secure/assessment"
-                    className="shadow-md flex flex-row gap-2 p-4 hover:bg-sky-800"
+                    className="shadow-md flex flex-row gap-2 p-4 hover:bg-blue-800"
                     onClick={closeDrawer}
                 >
                     <img
@@ -143,7 +144,7 @@ const AuthLayout = () => {
                 </Link>
                 <Link
                     to="/secure/reports"
-                    className="shadow-md flex flex-row gap-2 p-4 hover:bg-sky-800"
+                    className="shadow-md flex flex-row gap-2 p-4 hover:bg-blue-800"
                     onClick={closeDrawer}
                 >
                     <img src={ReportsIcon} alt="Reports" className="w-6 h-6" />
@@ -151,7 +152,7 @@ const AuthLayout = () => {
                 </Link>
                 <Link
                     to="/secure/recommendation"
-                    className="shadow-md flex flex-row gap-2 p-4 hover:bg-sky-800"
+                    className="shadow-md flex flex-row gap-2 p-4 hover:bg-blue-800"
                     onClick={closeDrawer}
                 >
                     <img
@@ -163,7 +164,7 @@ const AuthLayout = () => {
                 </Link>
                 <Link
                     to="/secure/knowledge-base"
-                    className="shadow-md flex flex-row gap-2 p-4 hover:bg-sky-800"
+                    className="shadow-md flex flex-row gap-2 p-4 hover:bg-blue-800"
                     onClick={closeDrawer}
                 >
                     <img
@@ -175,7 +176,7 @@ const AuthLayout = () => {
                 </Link>
                 <Link
                     to="/secure/library"
-                    className="shadow-md flex flex-row gap-2 p-4 hover:bg-sky-800"
+                    className="shadow-md flex flex-row gap-2 p-4 hover:bg-blue-800"
                     onClick={closeDrawer}
                 >
                     <img src={LibraryIcon} alt="Library" className="w-6 h-6" />
@@ -185,7 +186,7 @@ const AuthLayout = () => {
                     <Accordion open={showAdmin}>
                         <AccordionHeader
                             onClick={handleShowAdmin}
-                            className="shadow-md flex flex-row gap-2 p-4 hover:bg-sky-800"
+                            className="shadow-md flex flex-row gap-2 p-4 hover:bg-blue-800"
                         >
                             <img
                                 src={AdminIcon}
@@ -208,10 +209,12 @@ const AuthLayout = () => {
                                 />
                             )}
                         </AccordionHeader>
-                        <AccordionBody className={'overflow-hidden bg-sky-500'}>
+                        <AccordionBody
+                            className={'overflow-hidden bg-blue-200'}
+                        >
                             <Link
                                 to="/secure/configuration"
-                                className="text-sm shadow-md flex flex-row gap-2 p-4 hover:bg-sky-800"
+                                className="text-sm shadow-md flex flex-row gap-2 p-4 hover:bg-blue-300"
                                 onClick={closeDrawer}
                             >
                                 <img
@@ -223,7 +226,7 @@ const AuthLayout = () => {
                             </Link>
                             <Link
                                 to="/secure/tenant-info"
-                                className="text-sm shadow-md flex flex-row gap-2 p-4 hover:bg-sky-800"
+                                className="text-sm shadow-md flex flex-row gap-2 p-4 hover:bg-blue-300"
                                 onClick={closeDrawer}
                             >
                                 <img
@@ -235,7 +238,7 @@ const AuthLayout = () => {
                             </Link>
                             <Link
                                 to="/secure/user-groups"
-                                className="text-sm shadow-md flex flex-row gap-2 p-4 hover:bg-sky-800"
+                                className="text-sm shadow-md flex flex-row gap-2 p-4 hover:bg-blue-300"
                                 onClick={closeDrawer}
                             >
                                 <img
@@ -247,7 +250,7 @@ const AuthLayout = () => {
                             </Link>
                             <Link
                                 to="/secure/users"
-                                className="text-sm shadow-md flex flex-row gap-2 p-4 hover:bg-sky-800"
+                                className="text-sm shadow-md flex flex-row gap-2 p-4 hover:bg-blue-300"
                                 onClick={closeDrawer}
                             >
                                 <img
@@ -258,8 +261,20 @@ const AuthLayout = () => {
                                 Users
                             </Link>
                             <Link
+                                to="/secure/import-data"
+                                className="text-sm shadow-md flex flex-row gap-2 p-4 hover:bg-blue-300"
+                                onClick={closeDrawer}
+                            >
+                                <img
+                                    src={ImportIcon}
+                                    alt="Import"
+                                    className="w-4 h-4"
+                                />
+                                Import Data
+                            </Link>
+                            <Link
                                 to="/secure/subscription"
-                                className="text-sm shadow-md flex flex-row gap-2 p-4 hover:bg-sky-800"
+                                className="text-sm shadow-md flex flex-row gap-2 p-4 hover:bg-blue-300"
                                 onClick={closeDrawer}
                             >
                                 <img
@@ -271,7 +286,7 @@ const AuthLayout = () => {
                             </Link>
                             <Link
                                 to="/secure/log-viewer"
-                                className="text-sm shadow-md flex flex-row gap-2 p-4 hover:bg-sky-800"
+                                className="text-sm shadow-md flex flex-row gap-2 p-4 hover:bg-blue-300"
                                 onClick={closeDrawer}
                             >
                                 <img

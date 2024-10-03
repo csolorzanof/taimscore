@@ -21,6 +21,8 @@ import AdminUserGroups from '../views/Secure/AdminUserGroups'
 import AdminUsers from '../views/Secure/AdminUsers'
 import AdminSubscription from '../views/Secure/AdminSubscription'
 import AdminLogViewer from '../views/Secure/AdminLogViewer'
+import ImportData from '../views/Secure/ImportData'
+import ImportDataMapping from '../views/Secure/ImportDataMapping'
 
 const Router = createBrowserRouter([
     { path: '/', element: <LandingPage /> },
@@ -52,6 +54,8 @@ const Router = createBrowserRouter([
             { path: 'users', element: <AdminUsers /> },
             { path: 'subscription', element: <AdminSubscription /> },
             { path: 'log-viewer', element: <AdminLogViewer /> },
+            { path: 'import-data', element: <ImportData /> },
+            { path: 'import-data/mapping', element: <ImportDataMapping /> },
         ],
     },
 ])
