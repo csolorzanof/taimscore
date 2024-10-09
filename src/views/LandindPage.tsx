@@ -75,6 +75,7 @@ const LandingPage = () => {
                 familyName: loginResponse.familyName,
                 givenName: loginResponse.givenName,
                 authProviderId: loginResponse.authProviderId,
+                tenantId: loginResponse.tenantId,
             })
             navigate('/secure/landing')
         }
@@ -132,6 +133,7 @@ const LandingPage = () => {
                                     givenName: loginResponse.givenName,
                                     authProviderId:
                                         loginResponse.authProviderId,
+                                    tenantId: loginResponse.tenantId,
                                 })
                                 navigate('/secure/landing')
                             }
@@ -198,13 +200,7 @@ const LandingPage = () => {
                 onClick={handleMSLogin}
                 className="bg-blue-700 p-2 text-white rounded w-60 flex flex-row items-center justify-center"
             >
-                {authenticatingMS && (
-                    <Spinner
-                        className="h-4 w-4 mr-2"
-                        onPointerEnterCapture={undefined}
-                        onPointerLeaveCapture={undefined}
-                    />
-                )}
+                {authenticatingMS && <Spinner className="h-4 w-4 mr-2" />}
                 <img
                     src={MicrosoftIcon}
                     alt="Microsoft"

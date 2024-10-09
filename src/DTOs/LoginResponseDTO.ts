@@ -9,4 +9,5 @@ export type LoginResponseDTO = {
     token: string
     redirectToRegister: boolean
     authProviderId: number
+    tenantId: number
 }

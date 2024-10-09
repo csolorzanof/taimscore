@@ -23,6 +23,8 @@ import AdminSubscription from '../views/Secure/AdminSubscription'
 import AdminLogViewer from '../views/Secure/AdminLogViewer'
 import ImportData from '../views/Secure/ImportData'
 import ImportDataMapping from '../views/Secure/ImportDataMapping'
+import ConfirmDataMappings from '../views/Secure/ConfirmDataMappings'
+import AssessmentImportDone from '../views/Secure/AssessmentImportDone'
 
 const Router = createBrowserRouter([
     { path: '/', element: <LandingPage /> },
@@ -56,6 +58,14 @@ const Router = createBrowserRouter([
             { path: 'log-viewer', element: <AdminLogViewer /> },
             { path: 'import-data', element: <ImportData /> },
             { path: 'import-data/mapping', element: <ImportDataMapping /> },
+            {
+                path: 'import-data/mapping-confirm',
+                element: <ConfirmDataMappings />,
+            },
+            {
+                path: 'import-data/import-done',
+                element: <AssessmentImportDone />,
+            },
         ],
     },
 ])

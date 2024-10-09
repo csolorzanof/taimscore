@@ -1,8 +1,11 @@
 import React, { useState, useContext } from 'react'
 import { useForm, Controller } from 'react-hook-form'
-import axios from 'axios'
+import axios, { AxiosError } from 'axios'
 import { AuthContext } from '../../AuthProvider'
 import { useNavigate } from 'react-router-dom'
+import { Spinner } from '@material-tailwind/react'
+import { AlertsContext } from '../../components/alerts/Alerts-Context'
+import { ImportAssessmentStandardResultDTO } from '../../DTOs/ImportAssessmentStandardResultDTO'
 
 const apiBaseURL = import.meta.env.VITE_BackendURL
 
@@ -10,6 +13,8 @@ const ImportData = () => {
     const [importType, setImportType] = useState('assessment-standard')
     const [assessmentAction, setAssessmentAction] = useState('new')
     const { token, setImportData } = useContext(AuthContext)
+    const { addAlert } = useContext(AlertsContext)
+    const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
 
     const {
@@ -32,6 +37,7 @@ const ImportData = () => {
     }
 
     const onSubmit = async (data: any) => {
+        setLoading(true)
         const formData = new FormData()
         formData.append('standardName', data.standardName)
         formData.append('standardVersion', data.standardVersion)
@@ -49,11 +55,28 @@ const ImportData = () => {
                 }
             )
             console.log('Import successful:', response.data)
-            setImportData(response.data)
+            const result: ImportAssessmentStandardResultDTO = {
+                StandardName: response.data.standardName,
+                StandardVersion: response.data.standardVersion,
+                JsonResult: response.data.jsonResult,
+                ColumnNames: response.data.columnNames,
+            }
+            result.JsonResult = JSON.parse(result.JsonResult as string)
+            setImportData(result)
+            setLoading(false)
             navigate('/secure/import-data/mapping')
             // Handle successful import (e.g., show a success message)
         } catch (error) {
+            const err = error as AxiosError
             console.error('Error importing standard:', error)
+            setLoading(false)
+            addAlert({
+                id: 'import-error',
+                message: `An error occurred while importing the standard: ${err.response?.data}`,
+                timeout: 5,
+                severity: 'error',
+                handleDismiss: null,
+            })
             // Handle error (e.g., show an error message)
         }
     }
@@ -166,8 +189,9 @@ const ImportData = () => {
                 <div className="mt-4">
                     <button
                         type="submit"
-                        className="bg-blue-500 text-white rounded p-2"
+                        className="bg-blue-500 text-white rounded p-2 flex flex-row gap-2 items-center justify-center"
                     >
+                        {loading && <Spinner className="h-4 w-4 mr-2" />}
                         Execute Import
                     </button>
                 </div>

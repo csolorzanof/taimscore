@@ -113,6 +113,7 @@ const Register = () => {
                 familyName: response.data.familyName,
                 givenName: response.data.givenName,
                 authProviderId: response.data.authProviderId,
+                tenantId: response.data.tenantId,
             }
             setToken(response.data.token)
             setUser(loggedInUser)
@@ -178,6 +179,7 @@ const Register = () => {
                 familyName: response.data.familyName,
                 givenName: response.data.givenName,
                 authProviderId: response.data.authProviderId,
+                tenantId: response.data.tenantId,
             }
             setToken(response.data.token)
             setUser(loggedInUser)

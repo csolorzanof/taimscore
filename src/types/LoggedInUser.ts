@@ -7,4 +7,5 @@ export type LoggedInUser = {
     familyName?: string
     givenName?: string
     authProviderId: number
+    tenantId: number
 }

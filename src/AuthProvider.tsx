@@ -4,6 +4,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from './store/store'
 import { setToken, setUser } from './store/authSlice'
 import { LoginResponseDTO } from './DTOs/LoginResponseDTO'
+import { ImportAssessmentStandardResultDTO } from './DTOs/ImportAssessmentStandardResultDTO'
+import { AssessmentWithMappingsDTO } from './DTOs/AssessmentWithMappingsDTO'
+import { AssessmentImportDoneDTO } from './DTOs/AssessmentImportDoneDTO'
 
 type AuthContextType = {
     token: string | null
@@ -13,8 +16,18 @@ type AuthContextType = {
     loginResponse: LoginResponseDTO | null
     setLoginResponse: (loginResponse: LoginResponseDTO | null) => void
     logout: () => void
-    importData: any
-    setImportData: any
+    importData: ImportAssessmentStandardResultDTO | null
+    setImportData: (
+        importData: ImportAssessmentStandardResultDTO | null
+    ) => void
+    assessmentWithMappings: AssessmentWithMappingsDTO | null
+    setAssessmentWithMappings: (
+        assessmentWithMappings: AssessmentWithMappingsDTO | null
+    ) => void
+    assessmentImportDone: AssessmentImportDoneDTO | null
+    setAssessmentImportDone: (
+        assessmentImportDone: AssessmentImportDoneDTO | null
+    ) => void
 }
 
 export const AuthContext = createContext({} as AuthContextType)
@@ -29,7 +42,14 @@ const AuthProvider = (props: PropsWithChildren<AuthProviderProps>) => {
         null
     )
 
-    const [importData, setImportData] = useState<any>(null)
+    const [importData, setImportData] =
+        useState<ImportAssessmentStandardResultDTO | null>(null)
+
+    const [assessmentWithMappings, setAssessmentWithMappings] =
+        useState<AssessmentWithMappingsDTO | null>(null)
+
+    const [assessmentImportDone, setAssessmentImportDone] =
+        useState<AssessmentImportDoneDTO | null>(null)
 
     const authValue = {
         token,
@@ -44,6 +64,10 @@ const AuthProvider = (props: PropsWithChildren<AuthProviderProps>) => {
         },
         importData,
         setImportData,
+        assessmentWithMappings,
+        setAssessmentWithMappings,
+        assessmentImportDone,
+        setAssessmentImportDone,
     }
 
     return (
