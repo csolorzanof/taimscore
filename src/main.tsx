@@ -12,9 +12,9 @@ const msalInstance = new PublicClientApplication(msalConfig)
 createRoot(document.getElementById('root')!).render(
     <GoogleOAuthProvider clientId={import.meta.env.VITE_GoogleClientID}>
         <MsalProvider instance={msalInstance}>
-            <StrictMode>
-                <App />
-            </StrictMode>
+            {/* <StrictMode> */}
+            <App />
+            {/* </StrictMode> */}
         </MsalProvider>
     </GoogleOAuthProvider>
 )

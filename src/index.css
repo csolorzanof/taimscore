@@ -2,6 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+    width: 100%;
+}
+
+body {
+    width: 100%;
+}
+
+#root {
+    width: 100%;
+}
+
 .text-flicker-out-glow {
     -webkit-animation: text-flicker-out-glow 2.5s linear both;
     animation: text-flicker-out-glow 2.5s linear both;

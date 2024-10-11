@@ -25,6 +25,9 @@ import ImportData from '../views/Secure/ImportData'
 import ImportDataMapping from '../views/Secure/ImportDataMapping'
 import ConfirmDataMappings from '../views/Secure/ConfirmDataMappings'
 import AssessmentImportDone from '../views/Secure/AssessmentImportDone'
+import AssessmentProfileNew from '../views/Secure/AssessmentProfileNew'
+import AssessmentProfileEdit from '../views/Secure/AssessmentProfileEdit'
+import UserGroupCreate from '../views/Secure/UserGroupCreate'
 
 const Router = createBrowserRouter([
     { path: '/', element: <LandingPage /> },
@@ -45,6 +48,14 @@ const Router = createBrowserRouter([
             { path: 'dashboard', element: <Dashboard /> },
             { path: 'training', element: <Training /> },
             { path: 'assessment-profile', element: <AssessmentProfile /> },
+            {
+                path: 'assessment-profile/new',
+                element: <AssessmentProfileNew />,
+            },
+            {
+                path: 'assessment-profile/edit/:id',
+                element: <AssessmentProfileEdit />,
+            },
             { path: 'assessment', element: <Assessment /> },
             { path: 'reports', element: <Reports /> },
             { path: 'recommendation', element: <Recommendation /> },
@@ -53,6 +64,7 @@ const Router = createBrowserRouter([
             { path: 'configuration', element: <AdminConfiguration /> },
             { path: 'tenant-info', element: <AdminTenantInformation /> },
             { path: 'user-groups', element: <AdminUserGroups /> },
+            { path: 'user-groups-create', element: <UserGroupCreate /> },
             { path: 'users', element: <AdminUsers /> },
             { path: 'subscription', element: <AdminSubscription /> },
             { path: 'log-viewer', element: <AdminLogViewer /> },

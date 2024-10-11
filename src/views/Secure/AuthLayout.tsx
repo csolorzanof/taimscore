@@ -44,10 +44,11 @@ const AuthLayout = () => {
     const handleShowAdmin = () => setShowAdmin(!showAdmin)
 
     return (
-        <div>
+        <div className="w-full">
             <Navbar
-                className="p-4 flex flex-row bg-blue-400 px-4 py-2 lg:px-8 lg:py-4"
+                className="p-4 flex flex-row bg-blue-400 px-4 py-2"
                 placeholder={undefined}
+                fullWidth={true}
             >
                 <div className="flex items-center">
                     <img
@@ -57,15 +58,15 @@ const AuthLayout = () => {
                         onClick={openDrawer}
                     />
                 </div>
-                <div className="container mx-auto flex items-center justify-between text-blue-gray-900">
+                <div className="flex flex-grow items-center justify-between text-blue-gray-900">
                     <Typography
-                        className="mr-4 cursor-pointer py-1.5 font-bold text-lg"
+                        className="mx-4 cursor-pointer py-1.5 font-bold text-lg"
                         placeholder={undefined}
                     >
                         <Link to="/secure/landing">TAIMSCORE</Link>
                     </Typography>
                 </div>
-                <Menu>
+                <Menu className="flex self-end">
                     <MenuHandler>
                         <div className="flex flex-col w-28 text-center items-center">
                             <img
