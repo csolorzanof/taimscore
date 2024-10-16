@@ -38,9 +38,6 @@ const AssessmentProfileNew = () => {
     const [assessmentStandards, setAssessmentStandards] = useState<
         AssessmentStandardDTO[]
     >([])
-    const [assessmentControlGroups, setAssessmentControlGroups] = useState<
-        AssessmentStandardControlGroupDTO[]
-    >([])
 
     const [processOwnerName, setProcessOwnerName] = useState('')
     const [processOwnerEmail, setProcessOwnerEmail] = useState('')
@@ -181,7 +178,6 @@ const AssessmentProfileNew = () => {
                         }
                     )
                     if (response.status === 200) {
-                        setAssessmentControlGroups(response.data)
                         const procOwners: ProcessOwnerDTO[] = response.data.map(
                             (r: AssessmentStandardControlGroupDTO) => {
                                 return {
@@ -294,6 +290,7 @@ const AssessmentProfileNew = () => {
                 <div className="w-full flex flex-row gap-4">
                     <div className="w-80 mb-4">
                         <Input
+                            crossOrigin=""
                             type="text"
                             label="Profile Name"
                             {...register('profileName', { required: true })}
@@ -469,6 +466,7 @@ const AssessmentProfileNew = () => {
                         </h2>
                         <div className="flex flex-row gap-2 border-b border-black pb-4">
                             <Input
+                                crossOrigin=""
                                 type="text"
                                 label="Name"
                                 value={processOwnerName}
@@ -478,6 +476,7 @@ const AssessmentProfileNew = () => {
                                 className="mt-1 block w-full"
                             />
                             <Input
+                                crossOrigin=""
                                 type="email"
                                 label="Email Address"
                                 value={processOwnerEmail}
@@ -487,6 +486,7 @@ const AssessmentProfileNew = () => {
                                 className="mt-1 block w-full"
                             />
                             <Input
+                                crossOrigin=""
                                 type="tel"
                                 label="Telephone Number"
                                 value={processOwnerTelephone}
@@ -545,6 +545,7 @@ const AssessmentProfileNew = () => {
                                         </td>
                                         <td>
                                             <Input
+                                                crossOrigin=""
                                                 type="text"
                                                 {...register(
                                                     `assessmentProfileProcessOwners.${index}.ownerName`,
@@ -564,6 +565,7 @@ const AssessmentProfileNew = () => {
                                         </td>
                                         <td>
                                             <Input
+                                                crossOrigin=""
                                                 type="text"
                                                 {...register(
                                                     `assessmentProfileProcessOwners.${index}.ownerEmail`,
@@ -583,6 +585,7 @@ const AssessmentProfileNew = () => {
                                         </td>
                                         <td>
                                             <Input
+                                                crossOrigin=""
                                                 type="text"
                                                 {...register(
                                                     `assessmentProfileProcessOwners.${index}.ownerTelephone`,

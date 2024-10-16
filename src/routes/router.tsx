@@ -3,7 +3,6 @@ import LandingPage from '../views/LandindPage'
 import TosPrivacy from '../views/TosPrivacy'
 import Register from '../views/Register'
 import PrivateRoute from './PrivateRoute'
-import SecureLandingPage from '../views/Secure/SecureLandingPage'
 import ResetPassword from '../views/ResetPassword'
 import RequestResetPassword from '../views/RequestResetPassword'
 import AuthLayout from '../views/Secure/AuthLayout'
@@ -28,6 +27,10 @@ import AssessmentImportDone from '../views/Secure/AssessmentImportDone'
 import AssessmentProfileNew from '../views/Secure/AssessmentProfileNew'
 import AssessmentProfileEdit from '../views/Secure/AssessmentProfileEdit'
 import UserGroupCreate from '../views/Secure/UserGroupCreate'
+import UserGroupEdit from '../views/Secure/UserGroupEdit'
+import InviteUser from '../views/Secure/InviteUser'
+import InviteAccept from '../views/InviteAccept'
+import UserEdit from '../views/Secure/UserEdit'
 
 const Router = createBrowserRouter([
     { path: '/', element: <LandingPage /> },
@@ -36,6 +39,7 @@ const Router = createBrowserRouter([
     { path: '/register', element: <Register /> },
     { path: '/reset-password', element: <ResetPassword /> },
     { path: '/request-reset-password', element: <RequestResetPassword /> },
+    { path: '/tenant-invite/:inviteCode', element: <InviteAccept /> },
     {
         path: '/secure',
         element: (
@@ -44,7 +48,7 @@ const Router = createBrowserRouter([
             </PrivateRoute>
         ),
         children: [
-            { path: 'landing', element: <SecureLandingPage /> },
+            { path: 'landing', element: <Dashboard /> },
             { path: 'dashboard', element: <Dashboard /> },
             { path: 'training', element: <Training /> },
             { path: 'assessment-profile', element: <AssessmentProfile /> },
@@ -65,7 +69,9 @@ const Router = createBrowserRouter([
             { path: 'tenant-info', element: <AdminTenantInformation /> },
             { path: 'user-groups', element: <AdminUserGroups /> },
             { path: 'user-groups-create', element: <UserGroupCreate /> },
+            { path: 'user-groups-edit/:id', element: <UserGroupEdit /> },
             { path: 'users', element: <AdminUsers /> },
+            { path: 'users-invite', element: <InviteUser /> },
             { path: 'subscription', element: <AdminSubscription /> },
             { path: 'log-viewer', element: <AdminLogViewer /> },
             { path: 'import-data', element: <ImportData /> },
@@ -78,6 +84,7 @@ const Router = createBrowserRouter([
                 path: 'import-data/import-done',
                 element: <AssessmentImportDone />,
             },
+            { path: 'edit-user/:userId', element: <UserEdit /> },
         ],
     },
 ])

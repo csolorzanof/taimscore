@@ -114,6 +114,8 @@ const Register = () => {
                 givenName: response.data.givenName,
                 authProviderId: response.data.authProviderId,
                 tenantId: response.data.tenantId,
+                isSaasAdmin: response.data.isSaasAdmin,
+                isTenantAdmin: response.data.isTenantAdmin,
             }
             setToken(response.data.token)
             setUser(loggedInUser)
@@ -152,7 +154,7 @@ const Register = () => {
                 answer: data.answer,
                 includeInRaffle: data.includeInRaffle,
                 isActive: true,
-                tenantId: 0,
+                tenantId: loginResponse?.tenantId!,
                 authProviderId: loginResponse
                     ? loginResponse.authProviderId
                     : 1,
@@ -160,6 +162,7 @@ const Register = () => {
                 givenName: `${data.firstName} ${data.lastName}`,
                 requiresSecQuestion: false,
                 createdDate: new Date(),
+                inviteCode: loginResponse?.inviteCode,
             }
             const response = await axios.post(
                 `${apiBaseURL}/registerGoogle`,
@@ -180,6 +183,8 @@ const Register = () => {
                 givenName: response.data.givenName,
                 authProviderId: response.data.authProviderId,
                 tenantId: response.data.tenantId,
+                isSaasAdmin: response.data.isSaasAdmin,
+                isTenantAdmin: response.data.isTenantAdmin,
             }
             setToken(response.data.token)
             setUser(loggedInUser)

@@ -9,6 +9,12 @@ export type UserGroupDTO = {
     assessmentProfiles: UserGroupAssessmentProfileDTO[]
 }
 
+export type SimpleUserGroupDTO = {
+    groupId?: number
+    tenantId: number
+    groupName: string
+}
+
 export type UserGroupAssessmentProfileDTO = {
     id?: number
     assessmentProfileId: number

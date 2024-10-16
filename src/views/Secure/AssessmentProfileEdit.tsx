@@ -328,6 +328,7 @@ const AssessmentProfileEdit = () => {
                 <div className="w-full flex flex-row gap-4">
                     <div className="w-80 mb-4">
                         <Input
+                            crossOrigin=""
                             type="text"
                             label="Profile Name"
                             {...register('profileName', { required: true })}
@@ -503,6 +504,7 @@ const AssessmentProfileEdit = () => {
                         </h2>
                         <div className="flex flex-row gap-2 border-b border-black pb-4">
                             <Input
+                                crossOrigin=""
                                 type="text"
                                 label="Name"
                                 value={processOwnerName}
@@ -512,6 +514,7 @@ const AssessmentProfileEdit = () => {
                                 className="mt-1 block w-full"
                             />
                             <Input
+                                crossOrigin=""
                                 type="email"
                                 label="Email Address"
                                 value={processOwnerEmail}
@@ -521,6 +524,7 @@ const AssessmentProfileEdit = () => {
                                 className="mt-1 block w-full"
                             />
                             <Input
+                                crossOrigin=""
                                 type="tel"
                                 label="Telephone Number"
                                 value={processOwnerTelephone}
@@ -579,6 +583,7 @@ const AssessmentProfileEdit = () => {
                                         </td>
                                         <td>
                                             <Input
+                                                crossOrigin=""
                                                 type="text"
                                                 {...register(
                                                     `assessmentProfileProcessOwners.${index}.ownerName`,
@@ -598,6 +603,7 @@ const AssessmentProfileEdit = () => {
                                         </td>
                                         <td>
                                             <Input
+                                                crossOrigin=""
                                                 type="text"
                                                 {...register(
                                                     `assessmentProfileProcessOwners.${index}.ownerEmail`,
@@ -617,6 +623,7 @@ const AssessmentProfileEdit = () => {
                                         </td>
                                         <td>
                                             <Input
+                                                crossOrigin=""
                                                 type="text"
                                                 {...register(
                                                     `assessmentProfileProcessOwners.${index}.ownerTelephone`,

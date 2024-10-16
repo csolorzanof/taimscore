@@ -1,16 +1,18 @@
 import { useState, useEffect, useContext } from 'react'
 import { useForm, useFieldArray } from 'react-hook-form'
+import { useParams, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { AuthContext } from '../../AuthProvider' // Adjust the path as necessary
 import { Button, Input } from '@material-tailwind/react'
 import { AlertsContext } from '../../components/alerts/Alerts-Context'
-import { useNavigate } from 'react-router-dom'
+
 import {
     UserGroupDTO,
     SimpleAssessmentProfileDTO,
 } from '../../DTOs/UserGroupDTO' // Adjust the path as necessary
 
-const UserGroupCreate = () => {
+const UserGroupEdit = () => {
+    const { id } = useParams<{ id: string }>()
     const { token, user } = useContext(AuthContext)
     const { addAlert } = useContext(AlertsContext)
     const navigate = useNavigate()
@@ -18,6 +20,8 @@ const UserGroupCreate = () => {
         register,
         handleSubmit,
         control,
+        setValue,
+        reset,
         formState: { errors },
     } = useForm<UserGroupDTO>({
         defaultValues: {
@@ -65,24 +69,51 @@ const UserGroupCreate = () => {
             }
         }
 
+        const fetchUserGroup = async () => {
+            try {
+                const response = await axios.get(
+                    `${import.meta.env.VITE_BackendURL}/usergroups/${id}`,
+                    {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        },
+                    }
+                )
+                if (response.status === 200) {
+                    const userGroup = response.data
+                    reset(userGroup)
+                    /*setValue('groupName', userGroup.groupName)
+                    setValue('createdUserId', userGroup.createdUserId)
+                    setValue('createdDate', new Date(userGroup.createdDate))
+                    userGroup.assessmentProfiles.forEach(
+                        (profile: UserGroupAssessmentProfileDTO) => {
+                            append(profile)
+                        }
+                    )*/
+                } else {
+                    console.error(
+                        'Failed to fetch user group:',
+                        response.statusText
+                    )
+                }
+            } catch (error) {
+                console.error('Error fetching user group:', error)
+            }
+        }
+
         fetchAvailableProfiles()
-    }, [token, user?.tenantId])
+        fetchUserGroup()
+    }, [token, user?.tenantId, id, setValue, append])
 
     const onSubmit = async (data: UserGroupDTO) => {
         if (data.assessmentProfiles.length === 0) {
-            addAlert({
-                id: 'user-group-create-fail',
-                severity: 'error',
-                message: 'You must add at least one assessment profile.',
-                timeout: 5,
-                handleDismiss: null,
-            })
+            alert('You must add at least one assessment profile.')
             return
         }
 
         try {
-            const response = await axios.post(
-                `${import.meta.env.VITE_BackendURL}/usergroups`,
+            const response = await axios.put(
+                `${import.meta.env.VITE_BackendURL}/usergroups/${id}`,
                 data,
                 {
                     headers: {
@@ -93,34 +124,34 @@ const UserGroupCreate = () => {
             )
 
             if (response.status === 200) {
-                console.log('User group created successfully')
+                console.log('User group updated successfully')
                 addAlert({
-                    id: 'user-group-create-success',
+                    id: 'user-group-updated',
                     severity: 'success',
-                    message: 'User group created successfully',
+                    message: 'User group updated successfully',
                     timeout: 5,
                     handleDismiss: null,
                 })
                 navigate('/secure/user-groups')
             } else {
                 console.error(
-                    'Failed to create user group:',
+                    'Failed to update user group:',
                     response.statusText
                 )
                 addAlert({
-                    id: 'user-group-create-fail',
+                    id: 'user-group-update-failed',
                     severity: 'error',
-                    message: 'Failed to create user group',
+                    message: 'Failed to update user group',
                     timeout: 5,
                     handleDismiss: null,
                 })
             }
         } catch (error) {
-            console.error('Error creating user group:', error)
+            console.error('Error updating user group:', error)
             addAlert({
-                id: 'user-group-create-fail',
+                id: 'user-group-update-failed',
                 severity: 'error',
-                message: 'An error occurred while creating the user group.',
+                message: 'Failed to update user group',
                 timeout: 5,
                 handleDismiss: null,
             })
@@ -158,7 +189,7 @@ const UserGroupCreate = () => {
 
     return (
         <div className="container mx-auto p-4">
-            <h1 className="text-2xl font-bold mb-4">Create New User Group</h1>
+            <h1 className="text-2xl font-bold mb-4">Edit User Group</h1>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="mb-4">
                     <label className="block text-sm font-medium text-gray-700">
@@ -168,7 +199,7 @@ const UserGroupCreate = () => {
                         type="text"
                         {...register('groupName', { required: true })}
                         className="mt-1 block w-full"
-                        crossOrigin=""
+                        crossOrigin="green"
                     />
                     {errors.groupName && (
                         <span className="text-red-500">
@@ -237,11 +268,11 @@ const UserGroupCreate = () => {
                     </div>
                 </div>
                 <Button type="submit" variant="gradient" color="green">
-                    Create User Group
+                    Update User Group
                 </Button>
             </form>
         </div>
     )
 }
 
-export default UserGroupCreate
+export default UserGroupEdit

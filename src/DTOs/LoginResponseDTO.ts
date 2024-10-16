@@ -10,4 +10,7 @@ export type LoginResponseDTO = {
     redirectToRegister: boolean
     authProviderId: number
     tenantId: number
+    inviteCode?: string
+    isSaasAdmin: boolean
+    isTenantAdmin: boolean
 }
