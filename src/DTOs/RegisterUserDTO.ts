@@ -27,4 +27,5 @@ export type RegisterUserDTO = {
     createdDate: Date
     updatedUserId?: number
     updatedDate?: Date
+    inviteCode?: string
 }

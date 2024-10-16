@@ -16,21 +16,16 @@ import LogoutIcon from '../../assets/logout-circle.svg'
 import { useContext, useState } from 'react'
 import { AuthContext } from '../../AuthProvider'
 import DashboardIcon from '../../assets/dashboard-alt.svg'
-import TrainingIcon from '../../assets/training.svg'
 import AssessmentProfileIcon from '../../assets/assessment-profile.svg'
 import AssessmentIcon from '../../assets/assessment.svg'
 import ReportsIcon from '../../assets/reports.svg'
 import RecommendationIcon from '../../assets/recommendation.svg'
-import KnowledgebaseIcon from '../../assets/knowledge-base.svg'
-import LibraryIcon from '../../assets/library.svg'
 import AdminIcon from '../../assets/admin.svg'
 import HamburgerIcon from '../../assets/hamburger.svg'
 import ConfigurationIcon from '../../assets/configuration.svg'
 import TenantInformationIcon from '../../assets/tenant-information.svg'
 import UserGroupsIcon from '../../assets/user-groups.svg'
 import UsersIcon from '../../assets/users.svg'
-import SubscriptionIcon from '../../assets/subscription.svg'
-import LogViewerIcon from '../../assets/log-viewer.svg'
 import RightChevron from '../../assets/right-chevron.svg'
 import DownChevron from '../../assets/down-chevron.svg'
 import ImportIcon from '../../assets/import.svg'
@@ -44,10 +39,11 @@ const AuthLayout = () => {
     const handleShowAdmin = () => setShowAdmin(!showAdmin)
 
     return (
-        <div>
+        <div className="w-full">
             <Navbar
-                className="p-4 flex flex-row bg-blue-400 px-4 py-2 lg:px-8 lg:py-4"
+                className="p-4 flex flex-row bg-blue-400 px-4 py-2"
                 placeholder={undefined}
+                fullWidth={true}
             >
                 <div className="flex items-center">
                     <img
@@ -57,9 +53,9 @@ const AuthLayout = () => {
                         onClick={openDrawer}
                     />
                 </div>
-                <div className="container mx-auto flex items-center justify-between text-blue-gray-900">
+                <div className="flex flex-grow items-center justify-between text-blue-gray-900">
                     <Typography
-                        className="mr-4 cursor-pointer py-1.5 font-bold text-lg"
+                        className="mx-4 cursor-pointer py-1.5 font-bold text-lg"
                         placeholder={undefined}
                     >
                         <Link to="/secure/landing">TAIMSCORE</Link>
@@ -122,7 +118,7 @@ const AuthLayout = () => {
                     />
                     <Typography placeholder={undefined}>Dashboard</Typography>
                 </Link>
-                <Link
+                {/* <Link
                     to="/secure/training"
                     className="shadow-md flex flex-row gap-2 p-4 hover:bg-blue-800"
                     onClick={closeDrawer}
@@ -133,7 +129,7 @@ const AuthLayout = () => {
                         className="w-6 h-6"
                     />
                     <Typography placeholder={undefined}>Training</Typography>
-                </Link>
+                </Link> */}
                 <Link
                     to="/secure/assessment-profile"
                     className="shadow-md flex flex-row gap-2 p-4 hover:bg-blue-800"
@@ -182,7 +178,7 @@ const AuthLayout = () => {
                         Recommendation
                     </Typography>
                 </Link>
-                <Link
+                {/* <Link
                     to="/secure/knowledge-base"
                     className="shadow-md flex flex-row gap-2 p-4 hover:bg-blue-800"
                     onClick={closeDrawer}
@@ -195,15 +191,15 @@ const AuthLayout = () => {
                     <Typography placeholder={undefined}>
                         Knowledge Base
                     </Typography>
-                </Link>
-                <Link
+                </Link> */}
+                {/* <Link
                     to="/secure/library"
                     className="shadow-md flex flex-row gap-2 p-4 hover:bg-blue-800"
                     onClick={closeDrawer}
                 >
                     <img src={LibraryIcon} alt="Library" className="w-6 h-6" />
                     <Typography placeholder={undefined}>Library</Typography>
-                </Link>
+                </Link> */}
                 <div>
                     <Accordion open={showAdmin} placeholder={undefined}>
                         <AccordionHeader
@@ -285,19 +281,21 @@ const AuthLayout = () => {
                                 />
                                 Users
                             </Link>
-                            <Link
-                                to="/secure/import-data"
-                                className="text-sm shadow-md flex flex-row gap-2 p-4 hover:bg-blue-300"
-                                onClick={closeDrawer}
-                            >
-                                <img
-                                    src={ImportIcon}
-                                    alt="Import"
-                                    className="w-4 h-4"
-                                />
-                                Import Data
-                            </Link>
-                            <Link
+                            {user?.isSaasAdmin && (
+                                <Link
+                                    to="/secure/import-data"
+                                    className="text-sm shadow-md flex flex-row gap-2 p-4 hover:bg-blue-300"
+                                    onClick={closeDrawer}
+                                >
+                                    <img
+                                        src={ImportIcon}
+                                        alt="Import"
+                                        className="w-4 h-4"
+                                    />
+                                    Import Data
+                                </Link>
+                            )}
+                            {/* <Link
                                 to="/secure/subscription"
                                 className="text-sm shadow-md flex flex-row gap-2 p-4 hover:bg-blue-300"
                                 onClick={closeDrawer}
@@ -308,8 +306,8 @@ const AuthLayout = () => {
                                     className="w-4 h-4"
                                 />
                                 Subscription
-                            </Link>
-                            <Link
+                            </Link> */}
+                            {/* <Link
                                 to="/secure/log-viewer"
                                 className="text-sm shadow-md flex flex-row gap-2 p-4 hover:bg-blue-300"
                                 onClick={closeDrawer}
@@ -320,7 +318,7 @@ const AuthLayout = () => {
                                     className="w-4 h-4"
                                 />
                                 Log Viewer
-                            </Link>
+                            </Link> */}
                         </AccordionBody>
                     </Accordion>
                 </div>

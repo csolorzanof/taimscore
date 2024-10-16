@@ -8,4 +8,6 @@ export type LoggedInUser = {
     givenName?: string
     authProviderId: number
     tenantId: number
+    isSaasAdmin: boolean
+    isTenantAdmin: boolean
 }

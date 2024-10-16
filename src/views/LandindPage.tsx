@@ -37,11 +37,11 @@ const LandingPage = () => {
         setAuthenticatingMS(true)
         instance
             .loginPopup(loginRequest)
-            .then((response) => {
+            .then((response: any) => {
                 console.log(response)
                 setAccount(response.account)
             })
-            .catch((e) => {
+            .catch((e: any) => {
                 console.error(e)
             })
     }
@@ -76,6 +76,8 @@ const LandingPage = () => {
                 givenName: loginResponse.givenName,
                 authProviderId: loginResponse.authProviderId,
                 tenantId: loginResponse.tenantId,
+                isSaasAdmin: loginResponse.isSaasAdmin,
+                isTenantAdmin: loginResponse.isTenantAdmin,
             })
             navigate('/secure/landing')
         }
@@ -98,7 +100,7 @@ const LandingPage = () => {
                     scopes: ['openid', 'profile', 'User.Read'],
                     account: account,
                 })
-                .then((response) => {
+                .then((response: any) => {
                     const userName = response.account.username
                     const uniqueId = response.uniqueId
                     const token = response.accessToken
@@ -134,6 +136,8 @@ const LandingPage = () => {
                                     authProviderId:
                                         loginResponse.authProviderId,
                                     tenantId: loginResponse.tenantId,
+                                    isSaasAdmin: loginResponse.isSaasAdmin,
+                                    isTenantAdmin: loginResponse.isTenantAdmin,
                                 })
                                 navigate('/secure/landing')
                             }
@@ -151,7 +155,7 @@ const LandingPage = () => {
                             })
                         })
                 })
-                .catch((e) => {
+                .catch((e: any) => {
                     setAuthenticatingMS(false)
                     console.error(e)
                     addAlert({
