@@ -233,18 +233,20 @@ const AuthLayout = () => {
                         <AccordionBody
                             className={'overflow-hidden bg-blue-200'}
                         >
-                            <Link
-                                to="/secure/configuration"
-                                className="text-sm shadow-md flex flex-row gap-2 p-4 hover:bg-blue-300"
-                                onClick={closeDrawer}
-                            >
-                                <img
-                                    src={ConfigurationIcon}
-                                    alt="Configuration"
-                                    className="w-4 h-4"
-                                />
-                                Configuration
-                            </Link>
+                            {user?.isSaasAdmin && (
+                                <Link
+                                    to="/secure/configuration"
+                                    className="text-sm shadow-md flex flex-row gap-2 p-4 hover:bg-blue-300"
+                                    onClick={closeDrawer}
+                                >
+                                    <img
+                                        src={ConfigurationIcon}
+                                        alt="Configuration"
+                                        className="w-4 h-4"
+                                    />
+                                    Configuration
+                                </Link>
+                            )}
                             <Link
                                 to="/secure/tenant-info"
                                 className="text-sm shadow-md flex flex-row gap-2 p-4 hover:bg-blue-300"

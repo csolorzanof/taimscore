@@ -1,4 +1,4 @@
-import { createContext, PropsWithChildren, useState } from 'react'
+import { createContext, PropsWithChildren, useEffect, useState } from 'react'
 import { LoggedInUser } from './types/LoggedInUser'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from './store/store'
@@ -7,6 +7,7 @@ import { LoginResponseDTO } from './DTOs/LoginResponseDTO'
 import { ImportAssessmentStandardResultDTO } from './DTOs/ImportAssessmentStandardResultDTO'
 import { AssessmentWithMappingsDTO } from './DTOs/AssessmentWithMappingsDTO'
 import { AssessmentImportDoneDTO } from './DTOs/AssessmentImportDoneDTO'
+import { jwtDecode } from 'jwt-decode'
 
 type AuthContextType = {
     token: string | null
@@ -50,6 +51,20 @@ const AuthProvider = (props: PropsWithChildren<AuthProviderProps>) => {
 
     const [assessmentImportDone, setAssessmentImportDone] =
         useState<AssessmentImportDoneDTO | null>(null)
+
+    useEffect(() => {
+        if (token) {
+            const decodedToken = jwtDecode(token)
+            const expirationTime = decodedToken.exp! * 1000 - Date.now()
+            const logoutTimeout = setTimeout(() => {
+                setToken(null)
+                setUser(null)
+                // Add any additional logout logic here
+            }, expirationTime)
+
+            return () => clearTimeout(logoutTimeout)
+        }
+    }, [token])
 
     const authValue = {
         token,
