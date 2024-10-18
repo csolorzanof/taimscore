@@ -31,6 +31,7 @@ import UserGroupEdit from '../views/Secure/UserGroupEdit'
 import InviteUser from '../views/Secure/InviteUser'
 import InviteAccept from '../views/InviteAccept'
 import UserEdit from '../views/Secure/UserEdit'
+import AssessmentFill from '../views/Secure/AssessmentFill'
 
 const Router = createBrowserRouter([
     { path: '/', element: <LandingPage /> },
@@ -61,6 +62,10 @@ const Router = createBrowserRouter([
                 element: <AssessmentProfileEdit />,
             },
             { path: 'assessment', element: <Assessment /> },
+            {
+                path: 'assessment/fill/:assessmentId',
+                element: <AssessmentFill />,
+            },
             { path: 'reports', element: <Reports /> },
             { path: 'recommendation', element: <Recommendation /> },
             { path: 'knowledge-base', element: <Knowledgebase /> },
