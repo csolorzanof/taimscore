@@ -79,8 +79,11 @@ const Assessment = () => {
                         response.statusText
                     )
                 }
-            } catch (error) {
+            } catch (error: any) {
                 console.error('Error fetching assessment profiles:', error)
+                if (error.response.status === 401) {
+                    navigate('/')
+                }
             }
         }
 
@@ -118,12 +121,15 @@ const Assessment = () => {
                             )
                         }
                         setLoadingAssessments(false)
-                    } catch (error) {
+                    } catch (error: any) {
                         setLoadingAssessments(false)
                         console.error(
                             'Error fetching assessment standards:',
                             error
                         )
+                        if (error.response.status === 401) {
+                            navigate('/')
+                        }
                     }
                 }
                 fetchAssessmentStandards()
@@ -161,9 +167,12 @@ const Assessment = () => {
                         )
                     }
                     setLoadingVersions(false)
-                } catch (error) {
+                } catch (error: any) {
                     setLoadingVersions(false)
                     console.error('Error fetching assessment versions:', error)
+                    if (error.response.status === 401) {
+                        navigate('/')
+                    }
                 }
             }
             fetchAssessmentVersions()
@@ -210,6 +219,7 @@ const Assessment = () => {
             tenantId: user?.tenantId!,
             createdUserId: user?.userId!,
             assessmentStandardId: selectedVersionId!,
+            assessmentProfileId: selectedProfileId!,
             assessmentName: assessmentName,
         }
 

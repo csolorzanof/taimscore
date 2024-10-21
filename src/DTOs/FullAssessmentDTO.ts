@@ -2,6 +2,7 @@ export type AssessmentDTO = {
     id?: number
     tenantId: number
     assessmentStandardId: number
+    assessmentProfileId: number
     assessmentName: string
     isCompleted: boolean
     isAReassessment: boolean
@@ -17,6 +18,7 @@ export type AssessmentCreateDTO = {
     tenantId: number
     createdUserId: number
     assessmentStandardId: number
+    assessmentProfileId: number
     assessmentName: string
 }
 
@@ -24,6 +26,7 @@ export type FullAssessmentDTO = {
     id?: number
     tenantId: number
     assessmentStandardId: number
+    assessmentProfileId: number
     assessmentName: string
     isCompleted: boolean
     isAReassessment: boolean
