@@ -32,6 +32,10 @@ import InviteUser from '../views/Secure/InviteUser'
 import InviteAccept from '../views/InviteAccept'
 import UserEdit from '../views/Secure/UserEdit'
 import AssessmentFill from '../views/Secure/AssessmentFill'
+import FeedbackForm from '../views/Secure/FeedbackForm'
+import FeedbackFormFill from '../views/Secure/FeedbackFormFill'
+import RecommendationView from '../views/Secure/RecommendationView'
+import ReportCompliance from '../views/Secure/ReportCompliance'
 
 const Router = createBrowserRouter([
     { path: '/', element: <LandingPage /> },
@@ -90,6 +94,16 @@ const Router = createBrowserRouter([
                 element: <AssessmentImportDone />,
             },
             { path: 'edit-user/:userId', element: <UserEdit /> },
+            { path: 'feedback', element: <FeedbackForm /> },
+            { path: 'feedback/:feedbackFormId', element: <FeedbackFormFill /> },
+            {
+                path: 'recommendation/view/:id',
+                element: <RecommendationView />,
+            },
+            {
+                path: 'reports/compliance/:id',
+                element: <ReportCompliance />,
+            },
         ],
     },
 ])

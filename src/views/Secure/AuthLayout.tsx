@@ -61,6 +61,14 @@ const AuthLayout = () => {
                         <Link to="/secure/landing">TAIMSCORE</Link>
                     </Typography>
                 </div>
+                <div className="flex flex-col w-28 text-center items-center justify-center">
+                    <Typography
+                        className="cursor-pointer py-1.5"
+                        placeholder={undefined}
+                    >
+                        <Link to="/secure/feedback">Feedback</Link>
+                    </Typography>
+                </div>
                 <Menu>
                     <MenuHandler>
                         <div className="flex flex-col w-28 text-center items-center">
