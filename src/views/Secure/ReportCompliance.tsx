@@ -115,6 +115,15 @@ const ReportCompliance = () => {
                     </table>
 
                     {complianceReport?.pieChartData.map((data, index) => {
+                        if (
+                            data.data[1][1] === 0 &&
+                            data.data[2][1] === 0 &&
+                            data.data[3][1] === 0 &&
+                            data.data[4][1] === 0 &&
+                            data.data[5][1] === 0
+                        ) {
+                            return <div></div>
+                        }
                         return (
                             <div
                                 key={`pie-chart-${index}`}

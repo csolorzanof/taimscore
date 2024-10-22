@@ -413,7 +413,7 @@ const Assessment = () => {
                                     Is Complete
                                 </th>
                                 <th className="border border-black p-2">
-                                    Overall Rating
+                                    Overall Score
                                 </th>
                                 <th className="border border-black p-2">
                                     Actions

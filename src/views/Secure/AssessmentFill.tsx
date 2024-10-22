@@ -201,10 +201,14 @@ const AssessmentFill = () => {
                 g.subControlGroups.forEach((s) => {
                     s.questions.forEach((q) => {
                         const relatedTo = q.mappings.split('|||')
-                        const relatedMapping = relatedTo.find((r) =>
-                            r.includes(m.mappingName)
-                        )
-                        const value = relatedMapping?.split(':')[1].trim()
+                        const relatedMapping = relatedTo.find((r) => {
+                            if (r.trim().includes(m.mappingName))
+                                return r.trim()
+                        })
+                        const parts = relatedMapping?.split(':')
+                        const value = parts
+                            ? parts[parts.length - 1].trim()
+                            : ''
                         if (
                             value !== undefined &&
                             value !== null &&
@@ -392,7 +396,7 @@ const AssessmentFill = () => {
                     Assessment: {assessment?.assessmentName}
                 </h1>
                 <div className="w-full mb-4 overflow-scroll">
-                    <h2 className="text-xl mb-2">Non-Compliance Ratings</h2>
+                    <h2 className="text-xl mb-2">Non-Compliance Scores</h2>
                     <table className="bg-white border border-gray-700 mb-4">
                         <thead>
                             <tr>
@@ -405,7 +409,7 @@ const AssessmentFill = () => {
                                         whiteSpace: 'nowrap',
                                     }}
                                 >
-                                    Overall Rating
+                                    Overall Score
                                 </th>
                                 <th
                                     className="py-2 px-4 border-gray-700 border bg-blue-300 hover:bg-blue-gray-300"
@@ -416,7 +420,7 @@ const AssessmentFill = () => {
                                         whiteSpace: 'nowrap',
                                     }}
                                 >
-                                    Top 20 Rating
+                                    Top 20 Score
                                 </th>
                                 {assessment?.mappingRatings?.map(
                                     (mapping, index) => (
@@ -483,7 +487,7 @@ const AssessmentFill = () => {
                                 Is Complete
                             </th>
                             <th className="w-36 border border-gray-400">
-                                Rating
+                                Score
                             </th>
                         </tr>
                     </thead>
@@ -504,17 +508,19 @@ const AssessmentFill = () => {
                             }
                         >
                             <table>
-                                <tr>
-                                    <td className="w-36 border border-gray-400">
-                                        {group.groupName}
-                                    </td>
-                                    <td className="w-36 border border-gray-400">
-                                        {group.isComplete ? 'Yes' : 'No'}
-                                    </td>
-                                    <td className="w-36 border border-gray-400">
-                                        {(group.rating * 100).toFixed(2)}%
-                                    </td>
-                                </tr>
+                                <tbody>
+                                    <tr>
+                                        <td className="w-36 border border-gray-400">
+                                            {group.groupName}
+                                        </td>
+                                        <td className="w-36 border border-gray-400">
+                                            {group.isComplete ? 'Yes' : 'No'}
+                                        </td>
+                                        <td className="w-36 border border-gray-400">
+                                            {(group.rating * 100).toFixed(2)}%
+                                        </td>
+                                    </tr>
+                                </tbody>
                             </table>
                         </AccordionHeader>
                         <AccordionBody>
@@ -534,7 +540,7 @@ const AssessmentFill = () => {
                                             Questions
                                         </th>
                                         <th className="w-36 border border-gray-400">
-                                            Rating
+                                            Score
                                         </th>
                                     </tr>
                                 </thead>
@@ -559,34 +565,39 @@ const AssessmentFill = () => {
                                             }
                                         >
                                             <table>
-                                                <tr>
-                                                    <td className="w-36 border border-gray-400 p-2">
-                                                        {subGroup.subControlId}
-                                                    </td>
-                                                    <td className="w-80 border border-gray-400 p-2 text-xs">
-                                                        {
-                                                            subGroup.subControlObjective
-                                                        }
-                                                    </td>
-                                                    <td className="w-36 border border-gray-400 p-2">
-                                                        {subGroup.isComplete
-                                                            ? 'Yes'
-                                                            : 'No'}
-                                                    </td>
-                                                    <td className="w-36 border border-gray-400 p-2">
-                                                        {
-                                                            subGroup.questions
-                                                                .length
-                                                        }
-                                                    </td>
-                                                    <td className="w-36 border border-gray-400 p-2">
-                                                        {(
-                                                            subGroup.rating *
-                                                            100
-                                                        ).toFixed(2)}
-                                                        %
-                                                    </td>
-                                                </tr>
+                                                <tbody>
+                                                    <tr>
+                                                        <td className="w-36 border border-gray-400 p-2">
+                                                            {
+                                                                subGroup.subControlId
+                                                            }
+                                                        </td>
+                                                        <td className="w-80 border border-gray-400 p-2 text-xs">
+                                                            {
+                                                                subGroup.subControlObjective
+                                                            }
+                                                        </td>
+                                                        <td className="w-36 border border-gray-400 p-2">
+                                                            {subGroup.isComplete
+                                                                ? 'Yes'
+                                                                : 'No'}
+                                                        </td>
+                                                        <td className="w-36 border border-gray-400 p-2">
+                                                            {
+                                                                subGroup
+                                                                    .questions
+                                                                    .length
+                                                            }
+                                                        </td>
+                                                        <td className="w-36 border border-gray-400 p-2">
+                                                            {(
+                                                                subGroup.rating *
+                                                                100
+                                                            ).toFixed(2)}
+                                                            %
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
                                             </table>
                                         </AccordionHeader>
                                         <AccordionBody>
@@ -603,7 +614,7 @@ const AssessmentFill = () => {
                                                             Related To
                                                         </th>
                                                         <th className="w-36 border border-gray-400">
-                                                            Top 20 Rating
+                                                            Top 20 Score
                                                         </th>
                                                         <th className="w-44 border border-gray-400">
                                                             Response

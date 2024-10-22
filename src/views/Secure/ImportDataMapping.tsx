@@ -10,7 +10,7 @@ const columnTypes = [
     'Question',
     'Question Objective',
     'Question Reference',
-    'Top 20 Rating',
+    'Top 20 Score',
     'HISPI Module',
     'Recommendation',
     'Control Mapping',
@@ -23,7 +23,7 @@ const requiredTypes = [
     'Question',
     'Question Objective',
     'Question Reference',
-    'Top 20 Rating',
+    'Top 20 Score',
     'Recommendation',
 ]
 
