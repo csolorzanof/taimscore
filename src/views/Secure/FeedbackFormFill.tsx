@@ -162,7 +162,7 @@ const FeedbackFormFill = () => {
                                                     Question
                                                 </th>
                                                 <th className="border">
-                                                    Select Rating
+                                                    Select Score
                                                 </th>
                                                 <th className="border">
                                                     Comments
