@@ -54,9 +54,9 @@ const RecommendationView = () => {
             <table className="min-w-full bg-white">
                 <thead>
                     <tr>
-                        <th className="py-2 px-4 border">Control Section</th>
-                        <th className="py-2 px-4 border">Control Objective</th>
-                        <th className="py-2 px-4 border">Control Weakness</th>
+                        <th className="py-2 px-4 border">Group Name</th>
+                        <th className="py-2 px-4 border">Objective</th>
+                        <th className="py-2 px-4 border">Weakness</th>
                         <th className="py-2 px-4 border">Recommendation</th>
                     </tr>
                 </thead>

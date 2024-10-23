@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from 'react'
 import axios from 'axios'
 import { AuthContext } from '../../AuthProvider' // Adjust the path as necessary
 import { DashboardDTO } from '../../DTOs/DashboardDTO'
+import { Spinner } from '@material-tailwind/react'
 
 const Dashboard = () => {
     const { token, user } = useContext(AuthContext)
@@ -41,7 +42,12 @@ const Dashboard = () => {
     }, [token, user?.tenantId])
 
     if (!dashboardData) {
-        return <div>Loading...</div>
+        return (
+            <div className="container mx-auto flex flex-col items-center justify-center p-8">
+                <Spinner color="blue" className="w-16 h-16" />
+                Loading...
+            </div>
+        )
     }
 
     // Pagination logic
