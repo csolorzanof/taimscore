@@ -486,10 +486,10 @@ const Register = () => {
                         )}
                     </div>
                 )}
-                <div className="flex space-x-2">
+                {/* <div className="flex space-x-2">
                     <label>Include in Raffle</label>
                     <input type="checkbox" {...register('includeInRaffle')} />
-                </div>
+                </div> */}
                 <div className="flex space-x-4">
                     <button
                         className="bg-blue-500 text-white rounded p-2 w-60"

@@ -144,7 +144,7 @@ const FeedbackFormFill = () => {
     let questionIndex = 0
     return (
         <div className="container mx-auto p-4">
-            <h1 className="text-2xl font-bold mb-4">Fill Feedback Form</h1>
+            <h1 className="text-2xl font-bold mb-4">Feedback Form</h1>
             <p>All questions are mandatory.</p>
             <form onSubmit={handleSubmit(onSubmit)}>
                 {FeedbackFillForm && (
