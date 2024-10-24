@@ -96,9 +96,7 @@ const ReportScore = () => {
                         alt="HISPI Logo"
                         className="w-32 h-32"
                     />
-                    <h1 className="text-2xl font-bold mb-4">
-                        TAIMSCORE Report
-                    </h1>
+                    <h1 className="text-2xl font-bold mb-4">Score Report</h1>
                     <h2 className="text-xl font-bold mb-4">for Assessment</h2>
                     <h2 className="text-xl font-bold mb-4">
                         {ratingsReport?.assessmentName},{' '}
