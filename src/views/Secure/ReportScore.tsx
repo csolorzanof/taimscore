@@ -144,13 +144,13 @@ const ReportScore = () => {
                         <thead>
                             <tr>
                                 <th className="bg-blue-700 text-white font-bold border p-2 w-36">
-                                    Rating System Score
+                                    Score
                                 </th>
                                 <th className="bg-blue-700 text-white font-bold border p-2">
                                     Maturity Level
                                 </th>
                                 <th className="bg-blue-700 text-white font-bold border p-2">
-                                    Score Scale
+                                    Maturity Description
                                 </th>
                                 <th className="bg-blue-700 text-white font-bold border p-2">
                                     Incident Probability

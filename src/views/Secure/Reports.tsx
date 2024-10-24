@@ -94,6 +94,12 @@ const Reports = () => {
             case 3:
                 navigate(`/secure/reports/score/${assessmentId}`)
                 break
+            case 4:
+                navigate(`/secure/reports/trending/${assessmentId}`)
+                break
+            case 5:
+                navigate(`/secure/reports/benchmark/${assessmentId}`)
+                break
             default:
                 console.error('Invalid report type selected')
         }
@@ -116,6 +122,8 @@ const Reports = () => {
                     <option value="1">1. Compliance Report</option>
                     <option value="2">2. Maturity Report</option>
                     <option value="3">3. Score Report</option>
+                    <option value="4">4. Trending Report</option>
+                    <option value="5">5. Benchmark Report</option>
                 </select>
             </div>
             <div className="mb-4">

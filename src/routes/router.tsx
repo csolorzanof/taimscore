@@ -38,6 +38,8 @@ import RecommendationView from '../views/Secure/RecommendationView'
 import ReportCompliance from '../views/Secure/ReportCompliance'
 import ReportScore from '../views/Secure/ReportScore'
 import ReportMaturity from '../views/Secure/ReportMaturity'
+import ReportBenchmark from '../views/Secure/ReportBenchmark'
+import ReportTrending from '../views/Secure/ReportTrending'
 
 const Router = createBrowserRouter([
     { path: '/', element: <LandingPage /> },
@@ -113,6 +115,14 @@ const Router = createBrowserRouter([
             {
                 path: 'reports/maturity/:id',
                 element: <ReportMaturity />,
+            },
+            {
+                path: 'reports/benchmark/:id',
+                element: <ReportBenchmark />,
+            },
+            {
+                path: 'reports/trending/:id',
+                element: <ReportTrending />,
             },
         ],
     },
