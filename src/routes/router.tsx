@@ -36,6 +36,8 @@ import FeedbackForm from '../views/Secure/FeedbackForm'
 import FeedbackFormFill from '../views/Secure/FeedbackFormFill'
 import RecommendationView from '../views/Secure/RecommendationView'
 import ReportCompliance from '../views/Secure/ReportCompliance'
+import ReportScore from '../views/Secure/ReportScore'
+import ReportMaturity from '../views/Secure/ReportMaturity'
 
 const Router = createBrowserRouter([
     { path: '/', element: <LandingPage /> },
@@ -103,6 +105,14 @@ const Router = createBrowserRouter([
             {
                 path: 'reports/compliance/:id',
                 element: <ReportCompliance />,
+            },
+            {
+                path: 'reports/score/:id',
+                element: <ReportScore />,
+            },
+            {
+                path: 'reports/maturity/:id',
+                element: <ReportMaturity />,
             },
         ],
     },
