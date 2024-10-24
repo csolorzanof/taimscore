@@ -320,7 +320,7 @@ const AssessmentProfileNew = () => {
                                             key={`org-${size.id}`}
                                             value={size.id}
                                         >
-                                            {size.orgSize}
+                                            {size.orgSize} employees
                                         </option>
                                     ))}
                                 </select>
@@ -382,7 +382,7 @@ const AssessmentProfileNew = () => {
                                             key={`ind-${revLevel.id}`}
                                             value={revLevel.id}
                                         >
-                                            {revLevel.revLevel}
+                                            {revLevel.revLevel} million dollars
                                         </option>
                                     ))}
                                 </select>

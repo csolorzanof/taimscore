@@ -342,7 +342,7 @@ const AuthLayout = () => {
                  */}
             </Drawer>
             <Outlet />
-            <div className="text-center mt-4 text-xs text-gray-800">
+            <div className="text-center mt-4 mb-4 text-xs text-gray-800">
                 &copy; eFortresses {new Date().getFullYear()}. All rights
                 reserved.
             </div>
