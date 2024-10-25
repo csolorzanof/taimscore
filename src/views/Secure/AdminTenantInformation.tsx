@@ -270,10 +270,10 @@ const AdminTenantInformation = () => {
                         )}
                     </div>
                 </div>
-                <div className="flex space-x-2">
+                {/* <div className="flex space-x-2">
                     <label>Include in Raffle</label>
                     <input type="checkbox" {...register('includeInRaffle')} />
-                </div>
+                </div> */}
                 <Button
                     type="submit"
                     variant="gradient"

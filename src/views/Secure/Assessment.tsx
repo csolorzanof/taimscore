@@ -57,6 +57,7 @@ const Assessment = () => {
         version: '',
         name: '',
     })
+    const [creatingAssessment, setCreatingAssessment] = useState(false)
 
     useEffect(() => {
         const fetchAssessmentProfiles = async () => {
@@ -224,6 +225,7 @@ const Assessment = () => {
         }
 
         try {
+            setCreatingAssessment(true)
             const response = await axios.post(
                 `${import.meta.env.VITE_BackendURL}/assessments`,
                 payload,
@@ -243,7 +245,9 @@ const Assessment = () => {
                     response.statusText
                 )
             }
+            setCreatingAssessment(false)
         } catch (error) {
+            setCreatingAssessment(false)
             console.error('Error creating assessment:', error)
         }
     }
@@ -389,8 +393,12 @@ const Assessment = () => {
                         <span className="text-red-500">{errors.name}</span>
                     )}
                 </div>
-                <div className="flex flex-col flex-1">
+                <div className="flex flex-row flex-1 items-center align-middle">
+                    {creatingAssessment && (
+                        <Spinner color="blue" className="w-6 h-6" />
+                    )}
                     <button
+                        disabled={creatingAssessment}
                         onClick={performAssessment}
                         className="bg-blue-500 text-white px-4 py-2 rounded mt-6"
                     >

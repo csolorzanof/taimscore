@@ -119,11 +119,11 @@ const Reports = () => {
                     }
                 >
                     <option value="0">-- SELECT --</option>
-                    <option value="1">1. Compliance Report</option>
-                    <option value="2">2. Maturity Report</option>
-                    <option value="3">3. Score Report</option>
-                    <option value="4">4. Trending Report</option>
-                    <option value="5">5. Benchmark Report</option>
+                    <option value="3">1. Score</option>
+                    <option value="2">2. Maturity</option>
+                    <option value="1">3. Compliance</option>
+                    <option value="5">4. Benchmark</option>
+                    <option value="4">5. Trending</option>
                 </select>
             </div>
             <div className="mb-4">
