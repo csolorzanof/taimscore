@@ -24,6 +24,12 @@ export type RatingsReportDTO = {
     ratingValue: number
 }
 
+export type TrendingReportDTO = {
+    assessmentProfileName: string
+    assessmentStandarName: string
+    ratingsReports: RatingsReportDTO[]
+}
+
 export type ControlGroupRatingDTO = {
     controlGroupName: string
     top20RatingSum: number

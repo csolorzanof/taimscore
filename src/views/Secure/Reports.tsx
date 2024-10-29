@@ -95,7 +95,7 @@ const Reports = () => {
                 navigate(`/secure/reports/score/${assessmentId}`)
                 break
             case 4:
-                navigate(`/secure/reports/trending/${assessmentId}`)
+                navigate(`/secure/reports/trending/${selectedProfileId}`)
                 break
             case 5:
                 navigate(`/secure/reports/benchmark/${assessmentId}`)
@@ -152,66 +152,86 @@ const Reports = () => {
                     Loading ...
                 </div>
             )}
-            {selectedProfileId && !loadingAssessments && (
-                <div className="mt-8">
-                    <h2 className="text-xl font-bold mb-4">Assessments</h2>
-                    <table className="min-w-full bg-white">
-                        <thead>
-                            <tr>
-                                <th className="py-2 px-4 border-b">ID</th>
-                                <th className="py-2 px-4 border-b">Name</th>
-                                <th className="py-2 px-4 border-b">Status</th>
-                                <th className="py-2 px-4 border-b">
-                                    Created Date
-                                </th>
-                                <th className="py-2 px-4 border-b">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {assessments.length === 0 && (
+            {selectedProfileId &&
+                !loadingAssessments &&
+                selectedReportType === 4 && (
+                    <div className="mt-8">
+                        <Button
+                            color="blue"
+                            onClick={() => handleViewReport(0)}
+                        >
+                            View Trending Report
+                        </Button>
+                    </div>
+                )}
+            {selectedProfileId &&
+                !loadingAssessments &&
+                selectedReportType !== 4 && (
+                    <div className="mt-8">
+                        <h2 className="text-xl font-bold mb-4">Assessments</h2>
+                        <table className="min-w-full bg-white">
+                            <thead>
                                 <tr>
-                                    <td
-                                        colSpan={5}
-                                        className="py-2 px-2 border text-center"
-                                    >
-                                        No assessments found
-                                    </td>
+                                    <th className="py-2 px-4 border-b">ID</th>
+                                    <th className="py-2 px-4 border-b">Name</th>
+                                    <th className="py-2 px-4 border-b">
+                                        Status
+                                    </th>
+                                    <th className="py-2 px-4 border-b">
+                                        Created Date
+                                    </th>
+                                    <th className="py-2 px-4 border-b">
+                                        Actions
+                                    </th>
                                 </tr>
-                            )}
-                            {assessments.map((assessment) => (
-                                <tr key={assessment.id}>
-                                    <td className="py-2 px-4 border-b">
-                                        {assessment.id}
-                                    </td>
-                                    <td className="py-2 px-4 border-b">
-                                        {assessment.assessmentName}
-                                    </td>
-                                    <td className="py-2 px-4 border-b">
-                                        {assessment.isCompleted
-                                            ? 'Completed'
-                                            : 'In Progress'}
-                                    </td>
-                                    <td className="py-2 px-4 border-b">
-                                        {new Date(
-                                            assessment.createdDate
-                                        ).toLocaleDateString()}
-                                    </td>
-                                    <td className="py-2 px-4 border-b">
-                                        <Button
-                                            color="blue"
-                                            onClick={() =>
-                                                handleViewReport(assessment.id!)
-                                            }
+                            </thead>
+                            <tbody>
+                                {assessments.length === 0 && (
+                                    <tr>
+                                        <td
+                                            colSpan={5}
+                                            className="py-2 px-2 border text-center"
                                         >
-                                            View Report
-                                        </Button>
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
-            )}
+                                            No assessments found
+                                        </td>
+                                    </tr>
+                                )}
+                                {assessments.map((assessment) => (
+                                    <tr key={assessment.id}>
+                                        <td className="py-2 px-4 border-b">
+                                            {assessment.id}
+                                        </td>
+                                        <td className="py-2 px-4 border-b">
+                                            {assessment.assessmentName}
+                                        </td>
+                                        <td className="py-2 px-4 border-b">
+                                            {assessment.isCompleted
+                                                ? 'Completed'
+                                                : 'In Progress'}
+                                        </td>
+                                        <td className="py-2 px-4 border-b">
+                                            {new Date(
+                                                assessment.createdDate
+                                            ).toLocaleDateString()}
+                                        </td>
+                                        <td className="py-2 px-4 border-b">
+                                            <Button
+                                                color="blue"
+                                                onClick={() =>
+                                                    handleViewReport(
+                                                        assessment.id!
+                                                    )
+                                                }
+                                            >
+                                                View Report
+                                            </Button>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                )}
         </div>
     )
 }
