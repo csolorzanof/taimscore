@@ -42,3 +42,14 @@ export type MaturityReportDTO = {
     complianceControls: ComplianceControl[]
     controlGroupRatings: ControlGroupRatingDTO[]
 }
+
+export type BenchmarkRatingDataDTO = {
+    assessmentName: string
+    industryGroupName: string
+    assessmentProfileName: string
+    assessmentStandardName: string
+    ratingScore: number
+    averageScore: number
+    error: boolean
+    errorMessage: string
+}

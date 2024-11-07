@@ -13,6 +13,7 @@ const columnTypes = [
     'Top 20 Score',
     'HISPI Module',
     'Recommendation',
+    'Related AI Incident',
     'Control Mapping',
 ]
 

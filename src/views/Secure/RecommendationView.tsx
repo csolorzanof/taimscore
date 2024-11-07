@@ -58,6 +58,9 @@ const RecommendationView = () => {
                         <th className="py-2 px-4 border">Objective</th>
                         <th className="py-2 px-4 border">Weakness</th>
                         <th className="py-2 px-4 border">Recommendation</th>
+                        <th className="py-2 px-4 border">
+                            Related AI Incident
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -84,6 +87,14 @@ const RecommendationView = () => {
                             </td>
                             <td className="py-2 px-2 border text-xs">
                                 {recommendation.recommendation}
+                            </td>
+                            <td className="py-2 px-2 border text-xs">
+                                <div
+                                    dangerouslySetInnerHTML={{
+                                        __html: recommendation.relatedAIIncident,
+                                    }}
+                                    className="related-ai-incident"
+                                />
                             </td>
                         </tr>
                     ))}

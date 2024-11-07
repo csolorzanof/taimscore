@@ -327,3 +327,8 @@ body {
         opacity: 0;
     }
 }
+
+.related-ai-incident a {
+    color: blue;
+    text-decoration: underline;
+}

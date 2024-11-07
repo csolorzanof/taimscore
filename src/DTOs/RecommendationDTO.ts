@@ -3,4 +3,5 @@ export type RecommendationDTO = {
     controlObjective: string
     controlWeakness: string
     recommendation: string
+    relatedAIIncident: string
 }

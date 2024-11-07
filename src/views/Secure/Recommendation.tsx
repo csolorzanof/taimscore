@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from 'react'
 import axios from 'axios'
 import { AuthContext } from '../../AuthProvider' // Adjust the path as necessary
-import { Button } from '@material-tailwind/react'
+import { Button, Spinner } from '@material-tailwind/react'
 import { AssessmentProfileDTO } from '../../DTOs/AssessmentProfileDTO'
 import { AssessmentDTO } from '../../DTOs/FullAssessmentDTO'
 import { useNavigate } from 'react-router-dom'
@@ -16,6 +16,7 @@ const Recommendation = () => {
         null
     )
     const [assessments, setAssessments] = useState<AssessmentDTO[]>([])
+    const [loadingAssessments, setLoadingAssessments] = useState(false)
 
     useEffect(() => {
         const fetchAssessmentProfiles = async () => {
@@ -48,6 +49,7 @@ const Recommendation = () => {
 
     const fetchAssessments = async (profileId: number) => {
         try {
+            setLoadingAssessments(true)
             const response = await axios.get(
                 `${
                     import.meta.env.VITE_BackendURL
@@ -66,7 +68,9 @@ const Recommendation = () => {
                     response.statusText
                 )
             }
+            setLoadingAssessments(false)
         } catch (error) {
+            setLoadingAssessments(false)
             console.error('Error fetching assessments:', error)
         }
     }
@@ -115,38 +119,61 @@ const Recommendation = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {assessments.map((assessment) => (
-                                <tr key={assessment.id}>
-                                    <td className="py-2 px-4 border-b">
-                                        {assessment.id}
-                                    </td>
-                                    <td className="py-2 px-4 border-b">
-                                        {assessment.assessmentName}
-                                    </td>
-                                    <td className="py-2 px-4 border-b">
-                                        {assessment.isCompleted
-                                            ? 'Completed'
-                                            : 'In Progress'}
-                                    </td>
-                                    <td className="py-2 px-4 border-b">
-                                        {new Date(
-                                            assessment.createdDate
-                                        ).toLocaleDateString()}
-                                    </td>
-                                    <td className="py-2 px-4 border-b">
-                                        <Button
-                                            color="blue"
-                                            onClick={() => {
-                                                navigate(
-                                                    `/secure/recommendation/view/${assessment.id}`
-                                                )
-                                            }}
-                                        >
-                                            View Recommendations
-                                        </Button>
+                            {loadingAssessments && (
+                                <tr>
+                                    <td
+                                        colSpan={5}
+                                        className="py-2 px-2 border text-center"
+                                    >
+                                        <Spinner className="w-6 h-6" /> Loading
+                                        Assessments...
                                     </td>
                                 </tr>
-                            ))}
+                            )}
+                            {!loadingAssessments &&
+                                assessments.length === 0 && (
+                                    <tr>
+                                        <td
+                                            colSpan={5}
+                                            className="py-2 px-2 border text-center"
+                                        >
+                                            No assessments found
+                                        </td>
+                                    </tr>
+                                )}
+                            {!loadingAssessments &&
+                                assessments.map((assessment) => (
+                                    <tr key={assessment.id}>
+                                        <td className="py-2 px-4 border-b">
+                                            {assessment.id}
+                                        </td>
+                                        <td className="py-2 px-4 border-b">
+                                            {assessment.assessmentName}
+                                        </td>
+                                        <td className="py-2 px-4 border-b">
+                                            {assessment.isCompleted
+                                                ? 'Completed'
+                                                : 'In Progress'}
+                                        </td>
+                                        <td className="py-2 px-4 border-b">
+                                            {new Date(
+                                                assessment.createdDate
+                                            ).toLocaleDateString()}
+                                        </td>
+                                        <td className="py-2 px-4 border-b">
+                                            <Button
+                                                color="blue"
+                                                onClick={() => {
+                                                    navigate(
+                                                        `/secure/recommendation/view/${assessment.id}`
+                                                    )
+                                                }}
+                                            >
+                                                View Recommendations
+                                            </Button>
+                                        </td>
+                                    </tr>
+                                ))}
                         </tbody>
                     </table>
                 </div>

@@ -614,6 +614,9 @@ const AssessmentFill = () => {
                                                             Related To
                                                         </th>
                                                         <th className="w-36 border border-gray-400">
+                                                            Related AI Incident
+                                                        </th>
+                                                        <th className="w-36 border border-gray-400">
                                                             Top 20 Score
                                                         </th>
                                                         <th className="w-44 border border-gray-400">
@@ -654,9 +657,22 @@ const AssessmentFill = () => {
                                                                 >
                                                                     <div className="w-36 h-60 overflow-scroll text-nowrap">
                                                                         {question.mappings.replace(
-                                                                            '|||',
+                                                                            /\|\|\|/g,
                                                                             ''
                                                                         )}
+                                                                    </div>
+                                                                </td>
+                                                                <td
+                                                                    className="border border-gray-400 p-2 text-xs"
+                                                                    style={{
+                                                                        whiteSpace:
+                                                                            'pre-line',
+                                                                    }}
+                                                                >
+                                                                    <div className="w-36 h-60 overflow-scroll text-nowrap">
+                                                                        {
+                                                                            question.relatedAIIncident
+                                                                        }
                                                                     </div>
                                                                 </td>
                                                                 <td className="border border-gray-400 p-2 text-center">

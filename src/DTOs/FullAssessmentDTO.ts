@@ -76,6 +76,7 @@ export type AssessmentQuestionDTO = {
     reference: string
     recommendation: string
     top20Rating: string
+    relatedAIIncident: string
     mappings: string
     responseCode: number
     responseText: string
